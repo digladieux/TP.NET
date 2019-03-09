@@ -8,14 +8,25 @@ namespace EntitiesLayer
 {
     public class Dossier : Entite
     {
+        
+
         public string Nom { get; set; }
         public DateTime DateDeCreation { get; set; }
         public DateTime DateDeModification { get; set; }
         public List<Entite> ListeEntite { get; set; }
 
-        public void AddEntite(Entite entite)
+        public Dossier(string nom) : base()
+        {
+            DateDeCreation = DateTime.Now;
+            DateDeModification = DateDeCreation;
+            Nom = nom;
+            ListeEntite = new List<Entite>();
+        }
+
+        public void AjouterEntite(Entite entite)
         {
             ListeEntite.Add(entite);
+            DateDeModification = DateTime.Now;
         }
 
         public override string ToString()

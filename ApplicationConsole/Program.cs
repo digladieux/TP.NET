@@ -1,5 +1,7 @@
-﻿using System;
+﻿using EntitiesLayer;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +13,14 @@ namespace ApplicationConsole
         static void Main(string[] args)
         {
             bool Running = true;
+            Dossier ListeDossier = null ;
             int ChoixUtilisateur;
+
             do
             {
                 AffichageMenu();
                 ChoixUtilisateur = Console.Read();
-                Running = ChoixMethode(ChoixUtilisateur);
+                Running = ChoixMethode(ListeDossier, ChoixUtilisateur);
             }while (Running) ;
         }
 
@@ -30,7 +34,7 @@ namespace ApplicationConsole
             Console.WriteLine("Taper 6 pour enregistrer les donnees");
         }
 
-        static bool ChoixMethode(int ChoixUtilisateur)
+        static bool ChoixMethode(Dossier ListeDossier, int ChoixUtilisateur)
         {
             bool Running = true;
             switch(ChoixUtilisateur)
@@ -39,14 +43,17 @@ namespace ApplicationConsole
                     Running = false;
                     break;
                 case 2:
+                    Console.WriteLine(ListeDossier);
                     break;
                 case 3:
                     break;
                 case 4:
                     break;
                 case 5:
+                    ListeDossier = Serialisation.SerialisationBinaire.Deserialize();
                     break;
                 case 6:
+                    Serialisation.SerialisationBinaire.Serialize(ListeDossier);
                     break;
                 default:
                     Console.WriteLine("Instruction Inconnue");
@@ -54,5 +61,7 @@ namespace ApplicationConsole
             }
             return Running;
         }
+
+        static
     }
 }

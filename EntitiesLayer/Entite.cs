@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace EntitiesLayer
 {
-    public interface Entite
+    public class Entite
     {
+        public static int Compteur { get; set; } = 0;
+        public int Id { get; private set; }
+
+        public Entite()
+        {
+            Id = Compteur;
+            Compteur++;
+        }
+
     }
 }

@@ -8,6 +8,7 @@ namespace EntitiesLayer
 {
     class Contact : Entite
     {
+
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Courriel { get; set; }
@@ -15,6 +16,17 @@ namespace EntitiesLayer
         public Lien Lien { get; set; }
         public DateTime DateDeCreation { get; set; }
         public DateTime DateDeModification { get; set; }
+
+        public Contact(string nom, string prenom, string courriel, string societe, Lien lien) : base()
+        {
+            Nom = nom;
+            Prenom = prenom;
+            Courriel = courriel;
+            Societe = societe;
+            Lien = lien;
+            DateDeCreation = DateTime.Now;
+            DateDeModification = DateDeCreation;
+        }
 
         public override string ToString()
         {
