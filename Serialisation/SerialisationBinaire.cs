@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace Serialisation
 {
-    public class SerialisationBinaire
+    public class SerialisationBinaire : ISerialisation
     {
-        public static Dossier Deserialize()
+        public Dossier Deserialise()
         {
             Dossier ListeDossier = null;
             FileStream Fichier = new FileStream("Arborescence.dat", FileMode.Open);
@@ -25,7 +25,6 @@ namespace Serialisation
             }catch (SerializationException e)
             {
                 Console.WriteLine("Echec de la deserialisation : " + e.Message);
-                throw;
             }
             finally
             {
@@ -35,9 +34,9 @@ namespace Serialisation
             return ListeDossier;
         }
 
-        public static void Serialize(Dossier Arborescence)
+        public void Serialise(Dossier Arborescence)
         {
-            FileStream Fichier = new FileStream("Arborescence.dat", FileMode.OpenOrCreate);
+            FileStream Fichier = new FileStream("Arborescence.dat", FileMode.Create);
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
             try

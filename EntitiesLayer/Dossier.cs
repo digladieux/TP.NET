@@ -15,6 +15,7 @@ namespace EntitiesLayer
         public DateTime DateDeModification { get; set; }
         public List<Entite> ListeEntite { get; set; }
 
+        public Dossier() { }
         public Dossier(string nom) : base()
         {
             DateDeCreation = DateTime.Now;

@@ -9,7 +9,7 @@ namespace EntitiesLayer
     public class Entite
     {
         public static int Compteur { get; set; } = 0;
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         public Entite()
         {
