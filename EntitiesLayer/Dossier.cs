@@ -30,15 +30,32 @@ namespace EntitiesLayer
             DateDeModification = DateTime.Now;
         }
 
-        public override string ToString()
+        public string ToString(bool ContactVisible)
         {
-            string Chaine = "[D] " + Nom + " (creation " + DateDeModification + ")\n";
+            string Chaine = "[D : " + Id + "] " + Nom + " (creation " + DateDeModification + ")\n";
             foreach(Entite entite in ListeEntite)
             {
-                Chaine += entite + "\n";
+                if ( (entite is Dossier) || (ContactVisible) ) 
+                {
+                    Chaine += entite + "\n";
+                }
 
             }
             return Chaine ;
+        }
+
+        public Dossier RechercherDossier(int Identifiant)
+        {
+            Dossier DossierRecherche = null;
+            if ( (Id == Identifiant) && (this is Dossier))
+            {
+                DossierRecherche = this;
+            }
+            foreach(Dossier Dossier in ListeEntite)
+            {
+                RechercherDossier(Identifiant);
+            }
+            return DossierRecherche;
         }
     }
 }

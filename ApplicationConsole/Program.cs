@@ -27,7 +27,7 @@ namespace ApplicationConsole
             }while (Running) ;
         }
 
-        static void AffichageMenu()
+        private static void AffichageMenu()
         {
             Console.WriteLine("\nTaper 1 pour sortir de l'application");
             Console.WriteLine("Taper 2 pour afficher l'arborescence");
@@ -37,7 +37,7 @@ namespace ApplicationConsole
             Console.WriteLine("Taper 6 pour enregistrer les donnees");
         }
 
-        static bool ChoixMethode(Dossier ListeDossier, int ChoixUtilisateur)
+        private static bool ChoixMethode(Dossier ListeDossier, int ChoixUtilisateur)
         {
             bool Running = true;
             switch(ChoixUtilisateur)
@@ -46,7 +46,7 @@ namespace ApplicationConsole
                     Running = false;
                     break;
                 case 2:
-                    Console.WriteLine(ListeDossier);
+                    Console.WriteLine(ListeDossier.ToString(true));
                     break;
                 case 3:
                     CaseCreationDossier(ListeDossier);
@@ -67,7 +67,7 @@ namespace ApplicationConsole
             return Running;
         }
 
-        static void CaseCreationContact(Dossier ListeDossier)
+        private static void CaseCreationContact(Dossier ListeDossier)
         {
             Console.WriteLine("Quel est le nom de votre contact ?");
             string NomContact = Console.ReadLine();
@@ -101,7 +101,9 @@ namespace ApplicationConsole
             } while ((RelationContact < 0) || (RelationContact > 4));
 
             Contact NouveauContact = new Contact(NomContact, PrenomContact, CourrielContact, SocieteContact, MethodeStatique.IntToLien(RelationContact));
-
+            Console.WriteLine("Où voulez vous inserer ce nouveau contact ?");
+            Dossier DossierParent = RechercheDossier(ListeDossier);
+            DossierParent.AjouterEntite(NouveauContact);
             //TODO Ou l'ajouter
 
         }
@@ -111,10 +113,12 @@ namespace ApplicationConsole
             Console.WriteLine("Comment voulez vous appeller votre dossier ?");
             string NomDossier = Console.ReadLine();
             Dossier NouveauDossier = new Dossier(NomDossier);
-         
-            //TODO Ou l'ajouter
+            Console.WriteLine("Où voulez vous inserer ce nouveau dossier ?");
+            Dossier DossierParent = RechercheDossier(ListeDossier);
+          
+            DossierParent.AjouterEntite(NouveauDossier);
         }
-        static void CaseSerialisation(Dossier ListeDossier)
+        private static void CaseSerialisation(Dossier ListeDossier)
         {
             Console.WriteLine("Comment voulez vous Serialiser votre arborescence ? ");
             Console.WriteLine("Taper 1 pour une serialisation binaire");
@@ -139,7 +143,7 @@ namespace ApplicationConsole
             Serialisation.Serialise(ListeDossier);
         }
 
-        static Dossier CaseDeserialisation()
+        private static Dossier CaseDeserialisation()
         {
             Console.WriteLine("Comment voulez vous Deserialiser votre arborescence ? ");
             Console.WriteLine("Taper 1 pour une deserialisation binaire");
@@ -163,7 +167,8 @@ namespace ApplicationConsole
 
             return Deserialisation.Deserialise();
         }
-        public static int ChoixUtilisateurValide()
+
+        private static int ChoixUtilisateurValide()
         {
             string ChaineChoixUtilisateur;
             int EntierChoixUtilisateur = -1;
@@ -183,6 +188,18 @@ namespace ApplicationConsole
             }
             return EntierChoixUtilisateur;
 
+        }
+
+        private static Dossier RechercheDossier(Dossier ListeDossier)
+        {
+            Dossier DossierParent = null;
+            while (DossierParent == null)
+            {
+                Console.WriteLine(ListeDossier.ToString(false));
+                int choix = ChoixUtilisateurValide();
+                DossierParent = ListeDossier.RechercherDossier(choix);
+            }
+            return DossierParent;
         }
     }
 
