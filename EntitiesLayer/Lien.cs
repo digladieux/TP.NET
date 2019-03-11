@@ -22,16 +22,16 @@ namespace EntitiesLayer
 
             switch (ChoixLien)
             {
-                case 0:
+                case 1:
                     Lien = Lien.Ami;
                     break;
-                case 1:
+                case 2:
                     Lien = Lien.Collegue;
                     break;
-                case 2:
+                case 3:
                     Lien = Lien.Relation;
                     break;
-                case 3:
+                case 4:
                     Lien = Lien.Reseau;
                     break;
                 default:

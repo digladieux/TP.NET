@@ -46,7 +46,7 @@ namespace EntitiesLayer
 
         public override string ToString()
         {
-            return "[C] " + Prenom + ", " + Nom + "(" + Societe + "), Email:" + Courriel + ", Link:" + Lien;
+            return "[C] " + Prenom + ", " + Nom + "(" + Societe + "), Email:" + Courriel + ", Link:" + Lien + "\n";
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ApplicationConsole
         {
             bool Running = true;
             Dossier ListeDossier = null ;
-            ListeDossier = new Dossier("Dossier 1");
+            ListeDossier = new Dossier("Dossier 1", 0);
             int EntierChoixUtilisateur;
 
             do
@@ -115,7 +115,8 @@ namespace ApplicationConsole
             Dossier NouveauDossier = new Dossier(NomDossier);
             Console.WriteLine("Où voulez vous inserer ce nouveau dossier ?");
             Dossier DossierParent = RechercheDossier(ListeDossier);
-          
+
+            NouveauDossier.Profondeur = DossierParent.Profondeur + 1;
             DossierParent.AjouterEntite(NouveauDossier);
         }
         private static void CaseSerialisation(Dossier ListeDossier)
