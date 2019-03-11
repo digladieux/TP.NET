@@ -15,14 +15,13 @@ namespace ApplicationConsole
         {
             bool Running = true;
             Dossier ListeDossier = null ;
-            ListeDossier = new Dossier("Dossier 1", 0);
             int EntierChoixUtilisateur;
 
             do
             {
                 AffichageMenu();
                 EntierChoixUtilisateur = ChoixUtilisateurValide();
-                Running = ChoixMethode(ListeDossier, EntierChoixUtilisateur);
+                Running = ChoixMethode(ref ListeDossier, EntierChoixUtilisateur);
 
             }while (Running) ;
         }
@@ -37,7 +36,7 @@ namespace ApplicationConsole
             Console.WriteLine("Taper 6 pour enregistrer les donnees");
         }
 
-        private static bool ChoixMethode(Dossier ListeDossier, int ChoixUtilisateur)
+        private static bool ChoixMethode(ref Dossier ListeDossier, int ChoixUtilisateur)
         {
             bool Running = true;
             switch(ChoixUtilisateur)
@@ -46,10 +45,17 @@ namespace ApplicationConsole
                     Running = false;
                     break;
                 case 2:
-                    Console.WriteLine(ListeDossier.ToString(true));
+                    if (ListeDossier == null)
+                    {
+                        Console.WriteLine("Arborescence Vide");
+                    }
+                    else
+                    {
+                        Console.WriteLine(ListeDossier.ToString(true));
+                    }
                     break;
                 case 3:
-                    CaseCreationDossier(ListeDossier);
+                    CaseCreationDossier(ref ListeDossier);
                     break;
                 case 4:
                     CaseCreationContact(ListeDossier);
@@ -69,55 +75,70 @@ namespace ApplicationConsole
 
         private static void CaseCreationContact(Dossier ListeDossier)
         {
-            Console.WriteLine("Quel est le nom de votre contact ?");
-            string NomContact = Console.ReadLine();
-
-            Console.WriteLine("Quel est le prenom de votre contact ?");
-            string PrenomContact = Console.ReadLine();
-
-            Console.WriteLine("Quel est la societe de votre contact ?");
-            string SocieteContact = Console.ReadLine();
-
-
-            Console.WriteLine("Quel est le courrier de votre contact ? (adresse email valide)");
-            bool IsCourrielValid = false;
-            string CourrielContact = null ;
-            while (!IsCourrielValid)
+            if (ListeDossier == null)
             {
-                CourrielContact = Console.ReadLine();
-                IsCourrielValid = Contact.IsValidCourriel(CourrielContact);
+                Console.WriteLine("Vous devez creer un dossier parent pour ajouter des contacts");
             }
-
-            Console.WriteLine("Quel est votre relation avec ce contact ?");
-            Console.WriteLine("Taper 1 si le contact est un Ami");
-            Console.WriteLine("Taper 2 si le contact est un Collegue");
-            Console.WriteLine("Taper 3 si le contact est une Relation");
-            Console.WriteLine("Taper 4 si le contact est un Reseau");
-
-            int RelationContact;
-            do
+            else
             {
-                RelationContact = ChoixUtilisateurValide();
-            } while ((RelationContact < 0) || (RelationContact > 4));
 
-            Contact NouveauContact = new Contact(NomContact, PrenomContact, CourrielContact, SocieteContact, MethodeStatique.IntToLien(RelationContact));
-            Console.WriteLine("Où voulez vous inserer ce nouveau contact ?");
-            Dossier DossierParent = RechercheDossier(ListeDossier);
-            DossierParent.AjouterEntite(NouveauContact);
-            //TODO Ou l'ajouter
+                Console.WriteLine("Quel est le nom de votre contact ?");
+                string NomContact = Console.ReadLine();
+
+                Console.WriteLine("Quel est le prenom de votre contact ?");
+                string PrenomContact = Console.ReadLine();
+
+                Console.WriteLine("Quel est la societe de votre contact ?");
+                string SocieteContact = Console.ReadLine();
+
+
+                Console.WriteLine("Quel est le courrier de votre contact ? (adresse email valide)");
+                bool IsCourrielValid = false;
+                string CourrielContact = null ;
+                while (!IsCourrielValid)
+                {
+                    CourrielContact = Console.ReadLine();
+                    IsCourrielValid = Contact.IsValidCourriel(CourrielContact);
+                }
+
+                Console.WriteLine("Quel est votre relation avec ce contact ?");
+                Console.WriteLine("Taper 1 si le contact est un Ami");
+                Console.WriteLine("Taper 2 si le contact est un Collegue");
+                Console.WriteLine("Taper 3 si le contact est une Relation");
+                Console.WriteLine("Taper 4 si le contact est un Reseau");
+
+                int RelationContact;
+                do
+                {
+                    RelationContact = ChoixUtilisateurValide();
+                } while ((RelationContact < 0) || (RelationContact > 4));
+
+                Contact NouveauContact = new Contact(NomContact, PrenomContact, CourrielContact, SocieteContact, MethodeStatique.IntToLien(RelationContact));
+                Console.WriteLine("Où voulez vous inserer ce nouveau contact ?");
+                Dossier DossierParent = RechercheDossier(ListeDossier);
+                DossierParent.AjouterEntite(NouveauContact);
+            }
 
         }
 
-        static void CaseCreationDossier(Dossier ListeDossier)
+        static void CaseCreationDossier(ref Dossier ListeDossier)
         {
             Console.WriteLine("Comment voulez vous appeller votre dossier ?");
             string NomDossier = Console.ReadLine();
             Dossier NouveauDossier = new Dossier(NomDossier);
-            Console.WriteLine("Où voulez vous inserer ce nouveau dossier ?");
-            Dossier DossierParent = RechercheDossier(ListeDossier);
 
-            NouveauDossier.Profondeur = DossierParent.Profondeur + 1;
-            DossierParent.AjouterEntite(NouveauDossier);
+            if (ListeDossier == null)
+            {
+                NouveauDossier.Profondeur = 0;
+                ListeDossier = NouveauDossier;
+            }
+            else
+            {
+                Console.WriteLine("Où voulez vous inserer ce nouveau dossier ?");
+                Dossier DossierParent = RechercheDossier(ListeDossier);
+                NouveauDossier.Profondeur = DossierParent.Profondeur + 1;
+                DossierParent.AjouterEntite(NouveauDossier);
+            }
         }
         private static void CaseSerialisation(Dossier ListeDossier)
         {

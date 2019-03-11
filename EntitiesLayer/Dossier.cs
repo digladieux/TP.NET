@@ -33,8 +33,8 @@ namespace EntitiesLayer
 
         public string ToString(bool ContactVisible)
         {
-            string Chaine = "[D : " + Id + "] " + Nom + " (creation " + DateDeModification + ")\n";
-            foreach(Entite entite in ListeEntite)
+            string  Chaine = "[D : " + Id + "] " + Nom + " (creation " + DateDeModification + ")\n";
+            foreach (Entite entite in ListeEntite)
             {
                 int i = 0;
                 while (i < Profondeur)
@@ -44,14 +44,12 @@ namespace EntitiesLayer
                 }
                 if (entite is Dossier)
                 {
-                    Chaine += " | " + ((Dossier)entite).ToString(ContactVisible) ;
+                    Chaine += " | " + ((Dossier)entite).ToString(ContactVisible);
                 }
                 else if (ContactVisible)
                 {
-                    Chaine += " | " + entite.ToString() ;
+                    Chaine += " | " + entite.ToString();
                 }
-
-
             }
             return Chaine ;
         }
