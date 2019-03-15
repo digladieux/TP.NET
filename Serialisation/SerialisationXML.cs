@@ -18,17 +18,25 @@ namespace Serialisation
 
         public SerialisationXML()
         {
-            CheminFichierChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "ArborescenceChiffree.dat";
-            CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "ArborescenceNonChiffree.dat";
+           
+            CheminFichierChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceChiffree.dat";
+            CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceNonChiffree.dat";
         }
 
         public Dossier Deserialise(Rijndael Chiffrement)
         {
-            XmlSerializer Serialiser = new XmlSerializer(typeof(Dossier));
-            TextReader Fichier = new StreamReader(CheminFichierNonChiffrer);
-            Dossier ListeDossier = (Dossier)Serialiser.Deserialize(Fichier);
-            Fichier.Close();
+            Dossier ListeDossier = null;
+            if (MethodeStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
+            {
+                XmlSerializer Serialiser = new XmlSerializer(typeof(Dossier));
+                TextReader Fichier = new StreamReader(CheminFichierNonChiffrer);
+                ListeDossier = (Dossier)Serialiser.Deserialize(Fichier);
+                Fichier.Close();
+                File.Delete(CheminFichierNonChiffrer);
+
+            }
             return ListeDossier;
+
 
         }
 
@@ -40,6 +48,7 @@ namespace Serialisation
         
             Serialiser.Serialize(Fichier, Arborescence);
             Fichier.Close();
+            MethodeStatique.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
         }
     }
 }

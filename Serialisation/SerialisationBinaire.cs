@@ -19,43 +19,20 @@ namespace Serialisation
 
         public SerialisationBinaire()
         {
-            CheminFichierChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "ArborescenceChiffree.dat";
-            CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "ArborescenceNonChiffree.dat";
+            CheminFichierChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName +"ArborescenceChiffree.dat";
+            CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceNonChiffree.dat";
         }
 
         public Dossier Deserialise(Rijndael Chiffrement)
         {
 
-          /*  string Password;
-            do
-            {
-                Console.WriteLine("Entrer un mdp");
-                Password = Console.ReadLine();
-            } while (!Password.Equals(MotDePasse));
 
-    */
+
+            MethodeStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
 
             Dossier ListeDossier = null;
-
             BinaryFormatter formatter = new BinaryFormatter();
-
-            /*FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.OpenOrCreate);
-            FileStream FichierChiffrer = new FileStream(CheminFichierChiffrer, FileMode.OpenOrCreate);
-
-            ICryptoTransform aesDecryptor = Chiffrement.CreateDecryptor();
-
-            CryptoStream cs = new CryptoStream(FichierNonChiffrer, aesDecryptor, CryptoStreamMode.Write);
-
-            int data;
-
-            while ((data = FichierChiffrer.ReadByte()) != -1)
-                cs.WriteByte((byte)data);
-
-            cs.Close();
-            FichierNonChiffrer.Close();
-            FichierChiffrer.Close();
-            */
-            FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.Open);
+            FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Open);
             try
             {
                 ListeDossier = (Dossier) formatter.Deserialize(FichierNonChiffrer);
@@ -65,19 +42,17 @@ namespace Serialisation
             }
             finally
             {
+                FichierNonChiffrer.Close();
             }
-            FichierNonChiffrer.Close();
-            //File.Delete(CheminFichierNonChiffrer);
+
+            File.Delete(CheminFichierNonChiffrer);
 
             return ListeDossier;
         }
 
         public void Serialise(Rijndael Chiffrement, Dossier Arborescence)
         {
-            FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.Create);
-
-         /*   Console.WriteLine("Entrer un mdp");
-            MotDePasse = Console.ReadLine();*/
+            FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Create);
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
             try
@@ -88,24 +63,11 @@ namespace Serialisation
             {
                 Console.WriteLine("Echec de la serialisation : " + e.Message);
             }
-            
-         /*   FileStream FichierChiffre = new FileStream(CheminFichierChiffrer, FileMode.Create);
-            ICryptoTransform aesEncryptor = Chiffrement.CreateEncryptor();
-            CryptoStream cs = new CryptoStream(FichierChiffre, aesEncryptor, CryptoStreamMode.Write);
-
-            int data;
-
-            while ((data = FichierNonChiffrer.ReadByte()) != -1)
-            {
-                cs.WriteByte((byte)data);
-            }
-            cs.Close();
-            */
             FichierNonChiffrer.Close();
-           /* File.Delete(CheminFichierNonChiffrer);
-            FichierChiffre.Close();*/
+            MethodeStatique.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
 
-       
+
+
         }
     }
 }

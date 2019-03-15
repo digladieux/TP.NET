@@ -13,4 +13,6 @@ namespace Serialisation
         Dossier Deserialise(Rijndael Chiffrement);
         void Serialise(Rijndael Chiffrement, Dossier Arborescence);
     }
+
+
 }
