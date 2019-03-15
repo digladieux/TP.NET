@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace EntitiesLayer
 {
+    [Serializable]
+    [XmlInclude(typeof(Dossier))]
+    [XmlInclude(typeof(Contact))]
     public class Dossier : Entite
     {
-        
+        [XmlElement("Profondeur")]
         public int Profondeur { get; set; }
+        [XmlElement("Nom")]
         public string Nom { get; set; }
+        [XmlElement("DateDeCreation")]
         public DateTime DateDeCreation { get; set; }
+        [XmlElement("DateDeModification")]
         public DateTime DateDeModification { get; set; }
+        [XmlArrayItem("ListeEntite", typeof(Entite))]
         public List<Entite> ListeEntite { get; set; }
 
         public Dossier() { }

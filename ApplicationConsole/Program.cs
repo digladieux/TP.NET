@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,27 +17,27 @@ namespace ApplicationConsole
             bool Running = true;
             Dossier ListeDossier = null ;
             int EntierChoixUtilisateur;
-
+            Rijndael Chiffrement = Rijndael.Create();
             do
             {
                 AffichageMenu();
                 EntierChoixUtilisateur = ChoixUtilisateurValide();
-                Running = ChoixMethode(ref ListeDossier, EntierChoixUtilisateur);
+                Running = ChoixMethode(ref ListeDossier, Chiffrement, EntierChoixUtilisateur);
 
             }while (Running) ;
         }
 
         private static void AffichageMenu()
         {
-            Console.WriteLine("\nTaper 1 pour sortir de l'application");
+            Console.WriteLine("Taper 1 pour sortir de l'application");
             Console.WriteLine("Taper 2 pour afficher l'arborescence");
             Console.WriteLine("Taper 3 pour ajouter un nouveau dossier");
             Console.WriteLine("Taper 4 pour ajouter un nouveau contact");
             Console.WriteLine("Taper 5 pour charger les donnees");
-            Console.WriteLine("Taper 6 pour enregistrer les donnees");
+            Console.WriteLine("Taper 6 pour enregistrer les donnees\n");
         }
 
-        private static bool ChoixMethode(ref Dossier ListeDossier, int ChoixUtilisateur)
+        private static bool ChoixMethode(ref Dossier ListeDossier, Rijndael Chiffrement, int ChoixUtilisateur)
         {
             bool Running = true;
             switch(ChoixUtilisateur)
@@ -47,7 +48,7 @@ namespace ApplicationConsole
                 case 2:
                     if (ListeDossier == null)
                     {
-                        Console.WriteLine("Arborescence Vide");
+                        Console.WriteLine("Arborescence Vide\n");
                     }
                     else
                     {
@@ -61,13 +62,27 @@ namespace ApplicationConsole
                     CaseCreationContact(ListeDossier);
                     break;
                 case 5:
-                    ListeDossier = CaseDeserialisation();
+                    if (ListeDossier == null)
+                    {
+                        Console.WriteLine("Il n'y a rien a Deserialiser\n");
+                    }
+                    else
+                    {
+                        ListeDossier = CaseDeserialisation(Chiffrement);
+                    }
                     break;
                 case 6:
-                    CaseSerialisation(ListeDossier);
+                    if (ListeDossier == null)
+                    {
+                        Console.WriteLine("Il n'y a rien a Serialiser\n");
+                    }
+                    else
+                    {
+                        CaseSerialisation(Chiffrement, ListeDossier);
+                    }
                     break;
                 default:
-                    Console.WriteLine("Instruction Inconnue");
+                    Console.WriteLine("Instruction Inconnue\n");
                     break;
             }
             return Running;
@@ -77,7 +92,7 @@ namespace ApplicationConsole
         {
             if (ListeDossier == null)
             {
-                Console.WriteLine("Vous devez creer un dossier parent pour ajouter des contacts");
+                Console.WriteLine("Vous devez creer un dossier parent pour ajouter des contacts\n");
             }
             else
             {
@@ -85,14 +100,14 @@ namespace ApplicationConsole
                 Console.WriteLine("Quel est le nom de votre contact ?");
                 string NomContact = Console.ReadLine();
 
-                Console.WriteLine("Quel est le prenom de votre contact ?");
+                Console.WriteLine("\nQuel est le prenom de votre contact ?");
                 string PrenomContact = Console.ReadLine();
 
-                Console.WriteLine("Quel est la societe de votre contact ?");
+                Console.WriteLine("\nQuel est la societe de votre contact ?");
                 string SocieteContact = Console.ReadLine();
 
 
-                Console.WriteLine("Quel est le courrier de votre contact ? (adresse email valide)");
+                Console.WriteLine("\nQuel est le courrier de votre contact ? (adresse email valide)\n");
                 bool IsCourrielValid = false;
                 string CourrielContact = null ;
                 while (!IsCourrielValid)
@@ -101,11 +116,11 @@ namespace ApplicationConsole
                     IsCourrielValid = Contact.IsValidCourriel(CourrielContact);
                 }
 
-                Console.WriteLine("Quel est votre relation avec ce contact ?");
+                Console.WriteLine("\nQuel est votre relation avec ce contact ?");
                 Console.WriteLine("Taper 1 si le contact est un Ami");
                 Console.WriteLine("Taper 2 si le contact est un Collegue");
                 Console.WriteLine("Taper 3 si le contact est une Relation");
-                Console.WriteLine("Taper 4 si le contact est un Reseau");
+                Console.WriteLine("Taper 4 si le contact est un Reseau\n");
 
                 int RelationContact;
                 do
@@ -114,7 +129,7 @@ namespace ApplicationConsole
                 } while ((RelationContact < 0) || (RelationContact > 4));
 
                 Contact NouveauContact = new Contact(NomContact, PrenomContact, CourrielContact, SocieteContact, MethodeStatique.IntToLien(RelationContact));
-                Console.WriteLine("Où voulez vous inserer ce nouveau contact ?");
+                Console.WriteLine("\nOù voulez vous inserer ce nouveau contact ?\n");
                 Dossier DossierParent = RechercheDossier(ListeDossier);
                 DossierParent.AjouterEntite(NouveauContact);
             }
@@ -123,9 +138,11 @@ namespace ApplicationConsole
 
         static void CaseCreationDossier(ref Dossier ListeDossier)
         {
-            Console.WriteLine("Comment voulez vous appeller votre dossier ?");
+            Console.WriteLine("Comment voulez vous appeller votre dossier ?\n");
             string NomDossier = Console.ReadLine();
             Dossier NouveauDossier = new Dossier(NomDossier);
+
+            Console.WriteLine();
 
             if (ListeDossier == null)
             {
@@ -140,11 +157,11 @@ namespace ApplicationConsole
                 DossierParent.AjouterEntite(NouveauDossier);
             }
         }
-        private static void CaseSerialisation(Dossier ListeDossier)
+        private static void CaseSerialisation(Rijndael Chiffrement, Dossier ListeDossier)
         {
             Console.WriteLine("Comment voulez vous Serialiser votre arborescence ? ");
             Console.WriteLine("Taper 1 pour une serialisation binaire");
-            Console.WriteLine("Taper 2 pour une serialisation XML");
+            Console.WriteLine("Taper 2 pour une serialisation XML\n");
 
             int ChoixUtilisateur;
             do
@@ -162,21 +179,21 @@ namespace ApplicationConsole
                 Serialisation = new SerialisationXML();
             }
 
-            Serialisation.Serialise(ListeDossier);
+            Serialisation.Serialise(Chiffrement, ListeDossier);
         }
 
-        private static Dossier CaseDeserialisation()
+        private static Dossier CaseDeserialisation(Rijndael Chiffrement)
         {
             Console.WriteLine("Comment voulez vous Deserialiser votre arborescence ? ");
             Console.WriteLine("Taper 1 pour une deserialisation binaire");
-            Console.WriteLine("Taper 2 pour une deserialisation XML");
+            Console.WriteLine("Taper 2 pour une deserialisation XML\n");
 
             int ChoixUtilisateur;
             do
             {
                 ChoixUtilisateur = ChoixUtilisateurValide();
             } while ((ChoixUtilisateur != 1) && (ChoixUtilisateur != 2));
-
+            Console.WriteLine();
             ISerialisation Deserialisation;
             if (ChoixUtilisateur == 1)
             {
@@ -187,7 +204,7 @@ namespace ApplicationConsole
                 Deserialisation = new SerialisationXML();
             }
 
-            return Deserialisation.Deserialise();
+            return Deserialisation.Deserialise(Chiffrement);
         }
 
         private static int ChoixUtilisateurValide()
@@ -202,10 +219,12 @@ namespace ApplicationConsole
                     ChaineChoixUtilisateur = Console.ReadLine();
                     EntierChoixUtilisateur = int.Parse(ChaineChoixUtilisateur);
                     IsChoixValide = true;
+                    Console.WriteLine();
+
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Chaine Invalide");
+                    Console.WriteLine("Chaine Invalide\n");
                 }
             }
             return EntierChoixUtilisateur;

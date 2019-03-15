@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntitiesLayer
 {
+    [Flags]
     public enum Lien
     {
         Ami,

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace EntitiesLayer
 {
+    [Serializable]
+    [XmlInclude(typeof(Entite))]
     public class Entite
     {
         public static int Compteur { get; set; } = 0;
