@@ -37,31 +37,28 @@ namespace Serialisation
             bool IsMotDePasseValide = MotDePasseValide();
             if (IsMotDePasseValide)
             {
-                FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.Create);
-                FileStream FichierChiffrer = null;
                 try
                 {
-                    FichierChiffrer = new FileStream(CheminFichierChiffrer, FileMode.Open);
-                    //FichierChiffrer = new FileStream("toto.txt", FileMode.Open);
+                    //FileStream FichierChiffrer = new FileStream(CheminFichierChiffrer, FileMode.Open);
+                    FileStream FichierChiffrer = new FileStream("toto.txt", FileMode.Open);
+                    FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.Create);
+                    ICryptoTransform aesDecryptor = Chiffrement.CreateDecryptor();
+
+                    CryptoStream cs = new CryptoStream(FichierNonChiffrer, aesDecryptor, CryptoStreamMode.Write);
+
+                    int data;
+
+                    while ((data = FichierChiffrer.ReadByte()) != -1)
+                        cs.WriteByte((byte)data);
+
+                    cs.Close();
+                    FichierNonChiffrer.Close();
+                    FichierChiffrer.Close();
                 }
                 catch(FileNotFoundException)
                 {
-                    Console.WriteLine("Le fichier n'existe pas \n");
-                    throw;
+                    Console.WriteLine("\nLe fichier n'existe pas");
                 }
-
-                ICryptoTransform aesDecryptor = Chiffrement.CreateDecryptor();
-
-                CryptoStream cs = new CryptoStream(FichierNonChiffrer, aesDecryptor, CryptoStreamMode.Write);
-
-                int data;
-
-                while ((data = FichierChiffrer.ReadByte()) != -1)
-                    cs.WriteByte((byte)data);
-
-                cs.Close();
-                FichierNonChiffrer.Close();
-                FichierChiffrer.Close();
             }
             else
             {

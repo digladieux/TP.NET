@@ -21,20 +21,27 @@ namespace Serialisation
 
         public void Deserialise(Rijndael Chiffrement, ref Dossier ListeDossier)
         {
+            
             if (MethodesStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
             {
                 Dossier ListeDossierTemporaire = null;
                 XmlSerializer Serialiser = new XmlSerializer(typeof(Dossier));
-                TextReader Fichier = new StreamReader(CheminFichierNonChiffrer);
-                ListeDossierTemporaire = (Dossier)Serialiser.Deserialize(Fichier);
-                Fichier.Close();
-                File.Delete(CheminFichierNonChiffrer);
-                if (ListeDossierTemporaire != null)
+
+                try
                 {
-                    ListeDossier = ListeDossierTemporaire;
+                    TextReader Fichier = new StreamReader(CheminFichierNonChiffrer);
+                    ListeDossierTemporaire = (Dossier)Serialiser.Deserialize(Fichier);
+                    Fichier.Close();
+                    File.Delete(CheminFichierNonChiffrer);
+                    if (ListeDossierTemporaire != null)
+                    {
+                        ListeDossier = ListeDossierTemporaire;
+                    }
                 }
-
-
+                catch(FileNotFoundException)
+                {
+                    Console.WriteLine("Vous gardez votre Liste de Dossier\n");
+                }
             }
         }
 

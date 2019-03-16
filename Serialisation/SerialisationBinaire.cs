@@ -24,25 +24,33 @@ namespace Serialisation
             {
                 Dossier ListeDossierTemporaire = null;
                 BinaryFormatter formatter = new BinaryFormatter();
-                FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Open);
+
                 try
                 {
-                    ListeDossierTemporaire = (Dossier) formatter.Deserialize(FichierNonChiffrer);
-                }catch (SerializationException e)
-                {
-                    Console.WriteLine("Echec de la deserialisation : " + e.Message);
+                    FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Open);
+                    try
+                    {
+                        ListeDossierTemporaire = (Dossier) formatter.Deserialize(FichierNonChiffrer);
+                    }catch (SerializationException e)
+                    {
+                        Console.WriteLine("Echec de la deserialisation : " + e.Message);
+                    }
+                    finally
+                    {
+                        FichierNonChiffrer.Close();
+                    }
+
+                    if (ListeDossierTemporaire != null)
+                    {
+                        ListeDossier = ListeDossierTemporaire;
+                    }
+                    File.Delete(CheminFichierNonChiffrer);
                 }
-                finally
+                catch (FileNotFoundException)
                 {
-                    FichierNonChiffrer.Close();
+                    Console.WriteLine("Vous gardez votre Liste de Dossier\n");
                 }
 
-                if (ListeDossierTemporaire != null)
-                {
-                    ListeDossier = ListeDossierTemporaire;
-                }
-
-                File.Delete(CheminFichierNonChiffrer);
             }
         }
 

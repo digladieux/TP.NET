@@ -41,14 +41,7 @@ namespace ApplicationConsole
                     Running = false;
                     break;
                 case 2:
-                    if (ListeDossier == null)
-                    {
-                        Console.WriteLine("Arborescence Vide\n");
-                    }
-                    else
-                    {
-                        Console.WriteLine(ListeDossier.ToString(true));
-                    }
+                    CaseAffichageArborescence(ListeDossier);
                     break;
                 case 3:
                     CaseCreationDossier(ref ListeDossier);
@@ -57,14 +50,7 @@ namespace ApplicationConsole
                     CaseCreationContact(ListeDossier);
                     break;
                 case 5:
-                    if (Constantes.ChoixSerialisation == null)
-                    {
-                        Console.WriteLine("Le fichier de Serialisation n'existe pas\n");
-                    }
-                    else
-                    {
-                        Constantes.ChoixSerialisation.Deserialise(Chiffrement, ref ListeDossier);
-                    }
+                    CaseDeserialisation(Chiffrement, ref ListeDossier);
                     break;
                 case 6:
                     CaseSerialisation(Chiffrement, ListeDossier);
@@ -76,11 +62,35 @@ namespace ApplicationConsole
             return Running;
         }
 
+        private static void CaseAffichageArborescence(Dossier ListeDossier)
+        {
+            if (ListeDossier == null)
+            {
+                Console.WriteLine("Arborescence Vide\n");
+            }
+            else
+            {
+                Console.WriteLine(ListeDossier.ToString(true));
+            }
+        }
+
+        private static void CaseDeserialisation(Rijndael Chiffrement, ref Dossier ListeDossier)
+        {
+            if (Constantes.ChoixSerialisation == null)
+            {
+                Console.WriteLine("Le fichier de Serialisation n'existe pas\n");
+            }
+            else
+            {
+                Constantes.ChoixSerialisation.Deserialise(Chiffrement, ref ListeDossier);
+            }
+        }
+
         private static void CaseCreationContact(Dossier ListeDossier)
         {
             if (ListeDossier == null)
             {
-                Console.WriteLine("Vous devez creer un dossier parent pour ajouter des contacts\n");
+                Console.WriteLine("Vous devez creer un dossier racine pour ajouter des contacts\n");
             }
             else
             {
