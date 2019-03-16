@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISerialisation.cs" />
+    <Compile Include="ConstantesMethodesStatique.cs" />
     <Compile Include="SerialisationBinaire.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialisationXML.cs" />

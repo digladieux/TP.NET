@@ -1,12 +1,7 @@
 ﻿using EntitiesLayer;
 using Serialisation;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationConsole
 {
@@ -62,24 +57,17 @@ namespace ApplicationConsole
                     CaseCreationContact(ListeDossier);
                     break;
                 case 5:
-                    if (ListeDossier == null)
+                    if (Constantes.ChoixSerialisation == null)
                     {
-                        Console.WriteLine("Il n'y a rien a Deserialiser\n");
+                        Console.WriteLine("Le fichier de Serialisation n'existe pas\n");
                     }
                     else
                     {
-                        ListeDossier = CaseDeserialisation(Chiffrement);
+                        ListeDossier = Constantes.ChoixSerialisation.Deserialise(Chiffrement);
                     }
                     break;
                 case 6:
-                    if (ListeDossier == null)
-                    {
-                        Console.WriteLine("Il n'y a rien a Serialiser\n");
-                    }
-                    else
-                    {
-                        CaseSerialisation(Chiffrement, ListeDossier);
-                    }
+                    CaseSerialisation(Chiffrement, ListeDossier);
                     break;
                 default:
                     Console.WriteLine("Instruction Inconnue\n");
@@ -159,52 +147,33 @@ namespace ApplicationConsole
         }
         private static void CaseSerialisation(Rijndael Chiffrement, Dossier ListeDossier)
         {
-            Console.WriteLine("Comment voulez vous Serialiser votre arborescence ? ");
-            Console.WriteLine("Taper 1 pour une serialisation binaire");
-            Console.WriteLine("Taper 2 pour une serialisation XML\n");
-
-            int ChoixUtilisateur;
-            do
+            if (ListeDossier == null)
             {
-                ChoixUtilisateur = ChoixUtilisateurValide();
-            }while((ChoixUtilisateur != 1) && (ChoixUtilisateur != 2) );
-
-            ISerialisation Serialisation;
-            if (ChoixUtilisateur == 1)
-            {
-                Serialisation = new SerialisationBinaire();
+                Console.WriteLine("Il n'y a rien a Serialiser\n");
             }
             else
             {
-                Serialisation = new SerialisationXML();
+                Console.WriteLine("Comment voulez vous Serialiser votre arborescence ? ");
+                Console.WriteLine("Taper 1 pour une serialisation binaire");
+                Console.WriteLine("Taper 2 pour une serialisation XML\n");
+
+                int ChoixUtilisateur;
+                do
+                {
+                    ChoixUtilisateur = ChoixUtilisateurValide();
+                }while((ChoixUtilisateur != 1) && (ChoixUtilisateur != 2) );
+
+                if (ChoixUtilisateur == 1)
+                {
+                    Constantes.ChoixSerialisation = new SerialisationBinaire() ;
+                }
+                else
+                {
+                    Constantes.ChoixSerialisation = new SerialisationXML();
+                }
+
+                Constantes.ChoixSerialisation.Serialise(Chiffrement, ListeDossier);
             }
-
-            Serialisation.Serialise(Chiffrement, ListeDossier);
-        }
-
-        private static Dossier CaseDeserialisation(Rijndael Chiffrement)
-        {
-            Console.WriteLine("Comment voulez vous Deserialiser votre arborescence ? ");
-            Console.WriteLine("Taper 1 pour une deserialisation binaire");
-            Console.WriteLine("Taper 2 pour une deserialisation XML\n");
-
-            int ChoixUtilisateur;
-            do
-            {
-                ChoixUtilisateur = ChoixUtilisateurValide();
-            } while ((ChoixUtilisateur != 1) && (ChoixUtilisateur != 2));
-            Console.WriteLine();
-            ISerialisation Deserialisation;
-            if (ChoixUtilisateur == 1)
-            {
-                Deserialisation = new SerialisationBinaire();
-            }
-            else
-            {
-                Deserialisation = new SerialisationXML();
-            }
-
-            return Deserialisation.Deserialise(Chiffrement);
         }
 
         private static int ChoixUtilisateurValide()

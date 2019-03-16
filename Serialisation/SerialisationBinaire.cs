@@ -1,14 +1,9 @@
 ﻿using EntitiesLayer;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Serialisation
 {
@@ -28,7 +23,7 @@ namespace Serialisation
 
 
 
-            MethodeStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
+            MethodesStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
 
             Dossier ListeDossier = null;
             BinaryFormatter formatter = new BinaryFormatter();
@@ -64,7 +59,7 @@ namespace Serialisation
                 Console.WriteLine("Echec de la serialisation : " + e.Message);
             }
             FichierNonChiffrer.Close();
-            MethodeStatique.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
+            MethodesStatique.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
 
 
 

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using EntitiesLayer;
 
@@ -26,7 +22,7 @@ namespace Serialisation
         public Dossier Deserialise(Rijndael Chiffrement)
         {
             Dossier ListeDossier = null;
-            if (MethodeStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
+            if (MethodesStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
             {
                 XmlSerializer Serialiser = new XmlSerializer(typeof(Dossier));
                 TextReader Fichier = new StreamReader(CheminFichierNonChiffrer);
@@ -48,7 +44,7 @@ namespace Serialisation
         
             Serialiser.Serialize(Fichier, Arborescence);
             Fichier.Close();
-            MethodeStatique.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
+            MethodesStatique.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
         }
     }
 }
