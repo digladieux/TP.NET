@@ -5,7 +5,7 @@ namespace Serialisation
 {
     public interface ISerialisation
     {
-        Dossier Deserialise(Rijndael Chiffrement);
+        void Deserialise(Rijndael Chiffrement, ref Dossier ListeDossier);
         void Serialise(Rijndael Chiffrement, Dossier Arborescence);
     }
 

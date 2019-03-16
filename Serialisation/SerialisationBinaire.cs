@@ -18,31 +18,32 @@ namespace Serialisation
             CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceNonChiffree.dat";
         }
 
-        public Dossier Deserialise(Rijndael Chiffrement)
+        public void Deserialise(Rijndael Chiffrement, ref Dossier ListeDossier)
         {
-
-
-
-            MethodesStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
-
-            Dossier ListeDossier = null;
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Open);
-            try
+            if (MethodesStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
             {
-                ListeDossier = (Dossier) formatter.Deserialize(FichierNonChiffrer);
-            }catch (SerializationException e)
-            {
-                Console.WriteLine("Echec de la deserialisation : " + e.Message);
+                Dossier ListeDossierTemporaire = null;
+                BinaryFormatter formatter = new BinaryFormatter();
+                FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Open);
+                try
+                {
+                    ListeDossierTemporaire = (Dossier) formatter.Deserialize(FichierNonChiffrer);
+                }catch (SerializationException e)
+                {
+                    Console.WriteLine("Echec de la deserialisation : " + e.Message);
+                }
+                finally
+                {
+                    FichierNonChiffrer.Close();
+                }
+
+                if (ListeDossierTemporaire != null)
+                {
+                    ListeDossier = ListeDossierTemporaire;
+                }
+
+                File.Delete(CheminFichierNonChiffrer);
             }
-            finally
-            {
-                FichierNonChiffrer.Close();
-            }
-
-            File.Delete(CheminFichierNonChiffrer);
-
-            return ListeDossier;
         }
 
         public void Serialise(Rijndael Chiffrement, Dossier Arborescence)

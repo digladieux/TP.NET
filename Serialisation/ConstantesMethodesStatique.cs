@@ -37,8 +37,18 @@ namespace Serialisation
             bool IsMotDePasseValide = MotDePasseValide();
             if (IsMotDePasseValide)
             {
-                FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.OpenOrCreate);
-                FileStream FichierChiffrer = new FileStream(CheminFichierChiffrer, FileMode.OpenOrCreate);
+                FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.Create);
+                FileStream FichierChiffrer = null;
+                try
+                {
+                    FichierChiffrer = new FileStream(CheminFichierChiffrer, FileMode.Open);
+                    //FichierChiffrer = new FileStream("toto.txt", FileMode.Open);
+                }
+                catch(FileNotFoundException)
+                {
+                    Console.WriteLine("Le fichier n'existe pas \n");
+                    throw;
+                }
 
                 ICryptoTransform aesDecryptor = Chiffrement.CreateDecryptor();
 

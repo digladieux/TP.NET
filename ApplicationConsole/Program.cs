@@ -63,7 +63,7 @@ namespace ApplicationConsole
                     }
                     else
                     {
-                        ListeDossier = Constantes.ChoixSerialisation.Deserialise(Chiffrement);
+                        Constantes.ChoixSerialisation.Deserialise(Chiffrement, ref ListeDossier);
                     }
                     break;
                 case 6:

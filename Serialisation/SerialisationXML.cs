@@ -19,21 +19,23 @@ namespace Serialisation
             CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceNonChiffree.dat";
         }
 
-        public Dossier Deserialise(Rijndael Chiffrement)
+        public void Deserialise(Rijndael Chiffrement, ref Dossier ListeDossier)
         {
-            Dossier ListeDossier = null;
             if (MethodesStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
             {
+                Dossier ListeDossierTemporaire = null;
                 XmlSerializer Serialiser = new XmlSerializer(typeof(Dossier));
                 TextReader Fichier = new StreamReader(CheminFichierNonChiffrer);
-                ListeDossier = (Dossier)Serialiser.Deserialize(Fichier);
+                ListeDossierTemporaire = (Dossier)Serialiser.Deserialize(Fichier);
                 Fichier.Close();
                 File.Delete(CheminFichierNonChiffrer);
+                if (ListeDossierTemporaire != null)
+                {
+                    ListeDossier = ListeDossierTemporaire;
+                }
+
 
             }
-            return ListeDossier;
-
-
         }
 
         public void Serialise(Rijndael Chiffrement, Dossier Arborescence)
