@@ -22,7 +22,7 @@ namespace Statique
         public void Deserialise(Rijndael Chiffrement, ref Dossier ListeDossier)
         {
             
-            if (MethodesStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
+            if (MethodesStatiques.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
             {
                 Dossier ListeDossierTemporaire = null;
                 XmlSerializer Serialiser = new XmlSerializer(typeof(Dossier));
@@ -53,7 +53,7 @@ namespace Statique
         
             Serialiser.Serialize(Fichier, Arborescence);
             Fichier.Close();
-            MethodesStatique.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
+            MethodesStatiques.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
         }
     }
 }

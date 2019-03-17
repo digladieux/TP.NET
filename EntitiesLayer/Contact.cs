@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace EntitiesLayer
 {
-    [Serializable]
     [XmlInclude(typeof(Contact))]
+    [Serializable]
     public class Contact : Entite
     {
         [XmlElement("Nom")]
@@ -37,16 +38,8 @@ namespace EntitiesLayer
 
         public static bool IsValidCourriel(string AdresseEmail)
         {
-            bool validCourriel = true;
-            try
-            {
-                new MailAddress(AdresseEmail);
-            }
-            catch (FormatException)
-            {
-                validCourriel = false;
-            }
-            return validCourriel;
+            Regex myRegex = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", RegexOptions.IgnoreCase);
+            return myRegex.IsMatch(AdresseEmail);
         }
 
         public override string ToString()

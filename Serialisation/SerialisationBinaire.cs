@@ -1,6 +1,7 @@
 ﻿using EntitiesLayer;
 using System;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
@@ -20,26 +21,16 @@ namespace Statique
 
         public void Deserialise(Rijndael Chiffrement, ref Dossier ListeDossier)
         {
-            if (MethodesStatique.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
+            if (MethodesStatiques.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
             {
-                Dossier ListeDossierTemporaire = null;
+                Dossier ListeDossierTemporaire = null ;
                 BinaryFormatter formatter = new BinaryFormatter();
 
                 try
                 {
                     FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Open);
-                    try
-                    {
-                        ListeDossierTemporaire = (Dossier) formatter.Deserialize(FichierNonChiffrer);
-                    }catch (SerializationException e)
-                    {
-                        Console.WriteLine("Echec de la deserialisation : " + e.Message);
-                    }
-                    finally
-                    {
-                        FichierNonChiffrer.Close();
-                    }
-
+                    ListeDossierTemporaire = (Dossier) formatter.Deserialize(FichierNonChiffrer);
+                    FichierNonChiffrer.Close();
                     if (ListeDossierTemporaire != null)
                     {
                         ListeDossier = ListeDossierTemporaire;
@@ -58,20 +49,9 @@ namespace Statique
         {
             FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Create);
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-            try
-            {
-                binaryFormatter.Serialize(FichierNonChiffrer, Arborescence);
-            }
-            catch(SerializationException e)
-            {
-                Console.WriteLine("Echec de la serialisation : " + e.Message);
-            }
+            binaryFormatter.Serialize(FichierNonChiffrer, Arborescence);
             FichierNonChiffrer.Close();
-            MethodesStatique.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
-
-
-
+            MethodesStatiques.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
         }
     }
 }

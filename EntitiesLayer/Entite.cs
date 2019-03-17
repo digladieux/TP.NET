@@ -3,8 +3,8 @@ using System.Xml.Serialization;
 
 namespace EntitiesLayer
 {
-    [Serializable]
     [XmlInclude(typeof(Entite))]
+    [Serializable]
     public class Entite
     {
         public static int Compteur { get; set; } = 0;

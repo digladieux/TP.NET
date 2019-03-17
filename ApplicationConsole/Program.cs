@@ -128,7 +128,9 @@ namespace ApplicationConsole
 
                 Contact NouveauContact = new Contact(NomContact, PrenomContact, CourrielContact, SocieteContact, LienMethodeStatique.IntToLien(RelationContact));
                 Console.WriteLine("\nOù voulez vous inserer ce nouveau contact ?\n");
-                Dossier DossierParent = Dossier.RechercheDossier(ListeDossier);
+
+                Dossier DossierParent = MethodesStatiques.RechercheDossier(ListeDossier);
+
                 DossierParent.AjouterEntite(NouveauContact);
             }
 
@@ -150,7 +152,9 @@ namespace ApplicationConsole
             else
             {
                 Console.WriteLine("Où voulez vous inserer ce nouveau dossier ?");
-                Dossier DossierParent = Dossier.RechercheDossier(ListeDossier);
+
+                Dossier DossierParent = MethodesStatiques.RechercheDossier(ListeDossier);
+
                 NouveauDossier.Profondeur = DossierParent.Profondeur + 1;
                 DossierParent.AjouterEntite(NouveauDossier);
             }

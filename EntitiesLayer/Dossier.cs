@@ -4,9 +4,9 @@ using System.Xml.Serialization;
 
 namespace EntitiesLayer
 {
-    [Serializable]
     [XmlInclude(typeof(Dossier))]
     [XmlInclude(typeof(Contact))]
+    [Serializable]
     public class Dossier : Entite
     {
         [XmlElement("Profondeur")]
@@ -57,18 +57,6 @@ namespace EntitiesLayer
                 }
             }
             return Chaine ;
-        }
-
-        public static Dossier RechercheDossier(Dossier ListeDossier)
-        {
-            Dossier DossierParent = null;
-            while (DossierParent == null)
-            {
-                Console.WriteLine(ListeDossier.ToString(false));
-                int choix =  MethodesStatiques.ChoixUtilisateurValide();
-                DossierParent = ListeDossier.RechercherDossier(choix);
-            }
-            return DossierParent;
         }
 
         public Dossier RechercherDossier(int Identifiant)

@@ -45,7 +45,6 @@
     <Compile Include="Dossier.cs" />
     <Compile Include="Entite.cs" />
     <Compile Include="Lien.cs" />
-    <Compile Include="MethodesStatiques.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

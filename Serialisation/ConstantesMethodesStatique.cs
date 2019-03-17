@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntitiesLayer;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Principal;
@@ -13,7 +14,7 @@ namespace Statique
         public static string MotDePasse = null;
     }
 
-    public class MethodesStatique
+    public class MethodesStatiques
     {
     
         public static void ChiffrementFichier(Rijndael Chiffrement, string CheminFichierChiffrer, string CheminFichierNonChiffrer)
@@ -126,7 +127,40 @@ namespace Statique
             Chifffrement.IV = rfcDb.GetBytes(16);
         }
 
+        public static Dossier RechercheDossier(Dossier ListeDossier)
+        {
+            Dossier DossierParent = null;
+            while (DossierParent == null)
+            {
+                Console.WriteLine(ListeDossier.ToString(false));
+                int choix = ChoixUtilisateurValide();
+                DossierParent = ListeDossier.RechercherDossier(choix);
+            }
+            return DossierParent;
+        }
 
 
+        public static int ChoixUtilisateurValide()
+        {
+            string ChaineChoixUtilisateur;
+            int EntierChoixUtilisateur = -1;
+            bool IsChoixValide = false;
+            while (!IsChoixValide)
+            {
+                try
+                {
+                    ChaineChoixUtilisateur = Console.ReadLine();
+                    EntierChoixUtilisateur = int.Parse(ChaineChoixUtilisateur);
+                    IsChoixValide = true;
+                    Console.WriteLine();
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Chaine Invalide\n");
+                }
+            }
+            return EntierChoixUtilisateur;
+        }
     }
 }
