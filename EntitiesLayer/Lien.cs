@@ -11,7 +11,7 @@ namespace EntitiesLayer
         Reseau
     }
 
-    public class MethodeStatique
+    public class LienMethodeStatique
     {
 
         public static Lien IntToLien(int ChoixLien)
@@ -38,8 +38,6 @@ namespace EntitiesLayer
 
             return Lien;
         }
-
-
     }
 
 }

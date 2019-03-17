@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
 
-namespace Serialisation
+namespace Statique
 {
 
     public class Constantes
@@ -17,6 +18,7 @@ namespace Serialisation
     
         public static void ChiffrementFichier(Rijndael Chiffrement, string CheminFichierChiffrer, string CheminFichierNonChiffrer)
         {
+            ChoixCleChiffrement(Chiffrement);
             TextReader FichierNonChiffrer = new StreamReader(CheminFichierNonChiffrer);
             FileStream FichierChiffre = new FileStream(CheminFichierChiffrer, FileMode.Create);
             ICryptoTransform aesEncryptor = Chiffrement.CreateEncryptor();
@@ -39,8 +41,8 @@ namespace Serialisation
             {
                 try
                 {
-                    //FileStream FichierChiffrer = new FileStream(CheminFichierChiffrer, FileMode.Open);
-                    FileStream FichierChiffrer = new FileStream("toto.txt", FileMode.Open);
+                    FileStream FichierChiffrer = new FileStream(CheminFichierChiffrer, FileMode.Open);
+                    //FileStream FichierChiffrer = new FileStream("toto.txt", FileMode.Open);
                     FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.Create);
                     ICryptoTransform aesDecryptor = Chiffrement.CreateDecryptor();
 
@@ -95,5 +97,36 @@ namespace Serialisation
 
             return IsMotDePasseValide;
         }
+
+        private static void ChoixCleChiffrement(Rijndael Chifffrement)
+        {
+            Console.WriteLine("Entrez la clé de chiffrement");
+            Console.WriteLine("Ne tapez rien pour une clé par défault");
+            Console.WriteLine("Sinon, taper une chaine de plus de 8 caracteres");
+            string CleUtilisateur;
+            do
+            {
+                CleUtilisateur = Console.ReadLine();
+
+            } while((CleUtilisateur != "") && (CleUtilisateur.Length < 8)) ;
+
+            Rfc2898DeriveBytes rfcDb; 
+
+            if (CleUtilisateur != "")
+            {
+                rfcDb = new Rfc2898DeriveBytes(CleUtilisateur, Encoding.UTF8.GetBytes(CleUtilisateur));
+
+            }
+            else
+            {
+                rfcDb = new Rfc2898DeriveBytes(WindowsIdentity.GetCurrent().User.ToString(), Encoding.UTF8.GetBytes(WindowsIdentity.GetCurrent().User.ToString()));
+            }
+
+            Chifffrement.Key = rfcDb.GetBytes(16);
+            Chifffrement.IV = rfcDb.GetBytes(16);
+        }
+
+
+
     }
 }

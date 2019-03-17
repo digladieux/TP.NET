@@ -1,5 +1,5 @@
 ﻿using EntitiesLayer;
-using Serialisation;
+using Statique;
 using System;
 using System.Security.Cryptography;
 
@@ -16,7 +16,7 @@ namespace ApplicationConsole
             do
             {
                 AffichageMenu();
-                EntierChoixUtilisateur = ChoixUtilisateurValide();
+                EntierChoixUtilisateur = MethodesStatiques.ChoixUtilisateurValide();
                 Running = ChoixMethode(ref ListeDossier, Chiffrement, EntierChoixUtilisateur);
 
             }while (Running) ;
@@ -123,12 +123,12 @@ namespace ApplicationConsole
                 int RelationContact;
                 do
                 {
-                    RelationContact = ChoixUtilisateurValide();
+                    RelationContact = MethodesStatiques.ChoixUtilisateurValide();
                 } while ((RelationContact < 0) || (RelationContact > 4));
 
-                Contact NouveauContact = new Contact(NomContact, PrenomContact, CourrielContact, SocieteContact, MethodeStatique.IntToLien(RelationContact));
+                Contact NouveauContact = new Contact(NomContact, PrenomContact, CourrielContact, SocieteContact, LienMethodeStatique.IntToLien(RelationContact));
                 Console.WriteLine("\nOù voulez vous inserer ce nouveau contact ?\n");
-                Dossier DossierParent = RechercheDossier(ListeDossier);
+                Dossier DossierParent = Dossier.RechercheDossier(ListeDossier);
                 DossierParent.AjouterEntite(NouveauContact);
             }
 
@@ -150,7 +150,7 @@ namespace ApplicationConsole
             else
             {
                 Console.WriteLine("Où voulez vous inserer ce nouveau dossier ?");
-                Dossier DossierParent = RechercheDossier(ListeDossier);
+                Dossier DossierParent = Dossier.RechercheDossier(ListeDossier);
                 NouveauDossier.Profondeur = DossierParent.Profondeur + 1;
                 DossierParent.AjouterEntite(NouveauDossier);
             }
@@ -170,7 +170,7 @@ namespace ApplicationConsole
                 int ChoixUtilisateur;
                 do
                 {
-                    ChoixUtilisateur = ChoixUtilisateurValide();
+                    ChoixUtilisateur = MethodesStatiques.ChoixUtilisateurValide();
                 }while((ChoixUtilisateur != 1) && (ChoixUtilisateur != 2) );
 
                 if (ChoixUtilisateur == 1)
@@ -186,41 +186,8 @@ namespace ApplicationConsole
             }
         }
 
-        private static int ChoixUtilisateurValide()
-        {
-            string ChaineChoixUtilisateur;
-            int EntierChoixUtilisateur = -1;
-            bool IsChoixValide = false;
-            while (!IsChoixValide)
-            {
-                try
-                {
-                    ChaineChoixUtilisateur = Console.ReadLine();
-                    EntierChoixUtilisateur = int.Parse(ChaineChoixUtilisateur);
-                    IsChoixValide = true;
-                    Console.WriteLine();
 
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Chaine Invalide\n");
-                }
-            }
-            return EntierChoixUtilisateur;
 
-        }
-
-        private static Dossier RechercheDossier(Dossier ListeDossier)
-        {
-            Dossier DossierParent = null;
-            while (DossierParent == null)
-            {
-                Console.WriteLine(ListeDossier.ToString(false));
-                int choix = ChoixUtilisateurValide();
-                DossierParent = ListeDossier.RechercherDossier(choix);
-            }
-            return DossierParent;
-        }
     }
 
    

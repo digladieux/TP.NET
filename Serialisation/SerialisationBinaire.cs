@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 
-namespace Serialisation
+namespace Statique
 {
     public class SerialisationBinaire : ISerialisation
     {

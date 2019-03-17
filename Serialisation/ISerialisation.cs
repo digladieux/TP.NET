@@ -1,7 +1,7 @@
 ﻿using EntitiesLayer;
 using System.Security.Cryptography;
 
-namespace Serialisation
+namespace Statique
 {
     public interface ISerialisation
     {

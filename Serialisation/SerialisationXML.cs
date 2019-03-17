@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Xml.Serialization;
 using EntitiesLayer;
 
-namespace Serialisation
+namespace Statique
 {
     public class SerialisationXML : ISerialisation
     {

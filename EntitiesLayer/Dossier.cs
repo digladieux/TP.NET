@@ -59,6 +59,18 @@ namespace EntitiesLayer
             return Chaine ;
         }
 
+        public static Dossier RechercheDossier(Dossier ListeDossier)
+        {
+            Dossier DossierParent = null;
+            while (DossierParent == null)
+            {
+                Console.WriteLine(ListeDossier.ToString(false));
+                int choix =  MethodesStatiques.ChoixUtilisateurValide();
+                DossierParent = ListeDossier.RechercherDossier(choix);
+            }
+            return DossierParent;
+        }
+
         public Dossier RechercherDossier(int Identifiant)
         {
             Dossier DossierRecherche = null;
