@@ -38,7 +38,7 @@ namespace EntitiesLayer
 
         public string ToString(bool ContactVisible)
         {
-            string  Chaine = "[D : " + Id + "] " + Nom + " (creation " + DateDeModification + ")\n";
+            string Chaine = "[D : " + Id + "] " + Nom + " (creation " + DateDeModification + ")\n";
             foreach (Entite entite in ListeEntite)
             {
                 int i = 0;
@@ -56,13 +56,13 @@ namespace EntitiesLayer
                     Chaine += " | " + entite.ToString();
                 }
             }
-            return Chaine ;
+            return Chaine;
         }
 
         public Dossier RechercherDossier(int Identifiant)
         {
             Dossier DossierRecherche = null;
-            if ( (Id == Identifiant) && (this is Dossier))
+            if ((Id == Identifiant) && (this is Dossier))
             {
                 DossierRecherche = this;
             }

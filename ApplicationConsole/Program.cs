@@ -11,7 +11,7 @@ namespace ApplicationConsole
         static void Main(string[] args)
         {
             bool Running = true;
-            Dossier ListeDossier = null ;
+            Dossier ListeDossier = null;
             int EntierChoixUtilisateur;
             Rijndael Chiffrement = Rijndael.Create();
             do
@@ -22,12 +22,12 @@ namespace ApplicationConsole
                     EntierChoixUtilisateur = SaisieUtilisateur.ChoixUtilisateurValide();
                     Running = ChoixMethode(ref ListeDossier, Chiffrement, EntierChoixUtilisateur);
                 }
-                catch(FormatException)
+                catch (FormatException)
                 {
                     Console.Write("Instruction inconnue\n");
                 }
 
-            }while (Running) ;
+            } while (Running);
         }
 
         /// <summary>
@@ -42,11 +42,11 @@ namespace ApplicationConsole
             Console.WriteLine("Taper 5 pour charger les donnees");
             Console.WriteLine("Taper 6 pour enregistrer les donnees\n");
         }
-        
+
         private static bool ChoixMethode(ref Dossier ListeDossier, Rijndael Chiffrement, int ChoixUtilisateur)
         {
             bool Running = true;
-            switch(ChoixUtilisateur)
+            switch (ChoixUtilisateur)
             {
                 case 1:
                     Running = false;
@@ -105,11 +105,11 @@ namespace ApplicationConsole
                     {
                         Constantes.ChoixSerialisation.Deserialise(Chiffrement, ref ListeDossier);
                     }
-                    catch(FileNotFoundException)
+                    catch (FileNotFoundException)
                     {
                         Console.WriteLine("Le fichier n'existe pas\n");
                     }
-                    catch(UnauthorizedAccessException e)
+                    catch (UnauthorizedAccessException e)
                     {
                         Console.WriteLine(e.Message);
                     }
@@ -147,7 +147,7 @@ namespace ApplicationConsole
 
                 Console.WriteLine("\nQuel est le courrier de votre contact ? (adresse email valide)\n");
                 bool IsCourrielValid = false;
-                string CourrielContact = null ;
+                string CourrielContact = null;
                 while (!IsCourrielValid)
                 {
                     CourrielContact = Console.ReadLine();
@@ -161,10 +161,11 @@ namespace ApplicationConsole
                     try
                     {
                         RelationContact = SaisieUtilisateur.ChoixUtilisateurValide();
-                    }catch(FormatException)
+                    }
+                    catch (FormatException)
                     {
                         RelationContact = -1;
-                        Console.WriteLine("Relation Invalide"); 
+                        Console.WriteLine("Relation Invalide");
                     }
                 } while ((RelationContact < 0) || (RelationContact > 4));
 
@@ -224,11 +225,11 @@ namespace ApplicationConsole
                         ChoixUtilisateur = -1;
                         Console.WriteLine("Combinaison Invalide");
                     }
-                }while((ChoixUtilisateur != 1) && (ChoixUtilisateur != 2) );
+                } while ((ChoixUtilisateur != 1) && (ChoixUtilisateur != 2));
 
                 if (ChoixUtilisateur == 1)
                 {
-                    Constantes.ChoixSerialisation = new SerialisationBinaire() ;
+                    Constantes.ChoixSerialisation = new SerialisationBinaire();
                 }
                 else
                 {
@@ -244,7 +245,7 @@ namespace ApplicationConsole
         private static Dossier RechercheDossier(Dossier ListeDossier)
         {
             Dossier DossierParent = null;
-            int ChoixUtilisateur; 
+            int ChoixUtilisateur;
             while (DossierParent == null)
             {
                 Console.WriteLine(ListeDossier.ToString(false));
@@ -259,7 +260,7 @@ namespace ApplicationConsole
                     Console.WriteLine("Dossier Inexistant");
                 }
             }
-            return DossierParent; 
+            return DossierParent;
         }
 
     }

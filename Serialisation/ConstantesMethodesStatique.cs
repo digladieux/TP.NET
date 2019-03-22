@@ -1,8 +1,6 @@
-﻿using EntitiesLayer;
-using System;
+﻿using System;
 using System.IO;
 using System.Security.Cryptography;
-using System.Security.Principal;
 using System.Text;
 
 namespace Statique
@@ -10,7 +8,7 @@ namespace Statique
 
     public class Constantes
     {
-        public static ISerialisation ChoixSerialisation = null ;
+        public static ISerialisation ChoixSerialisation = null;
         public static string MotDePasse = null;
         public static string CheminFichierChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceChiffree.dat";
         public static string CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceNonChiffree.dat";
@@ -18,7 +16,7 @@ namespace Statique
 
     public class MethodesStatiques
     {
-    
+
         public static void ChiffrementFichier(Rijndael Chiffrement)
         {
             TextReader FichierNonChiffrer = null;
@@ -57,31 +55,32 @@ namespace Statique
             try
             {
                 FichierChiffrer = new FileStream(Constantes.CheminFichierChiffrer, FileMode.Open);
-                    //FileStream FichierChiffrer = new FileStream("toto.txt", FileMode.Open);
-                    FileStream FichierNonChiffrer = new FileStream(Constantes.CheminFichierNonChiffrer, FileMode.Create);
-                    ICryptoTransform aesDecryptor = Chiffrement.CreateDecryptor();
+                //FileStream FichierChiffrer = new FileStream("toto.txt", FileMode.Open);
+                FileStream FichierNonChiffrer = new FileStream(Constantes.CheminFichierNonChiffrer, FileMode.Create);
+                ICryptoTransform aesDecryptor = Chiffrement.CreateDecryptor();
 
-                    cs = new CryptoStream(FichierNonChiffrer, aesDecryptor, CryptoStreamMode.Write);
+                cs = new CryptoStream(FichierNonChiffrer, aesDecryptor, CryptoStreamMode.Write);
 
-                    int data;
+                int data;
 
-                    while ((data = FichierChiffrer.ReadByte()) != -1)
-                        cs.WriteByte((byte)data);
-
-                }
-                finally
+                while ((data = FichierChiffrer.ReadByte()) != -1)
                 {
-                    /* Cs ferme le fichier non chiffrer */
-                    if (cs != null)
-                    {
-                        cs.Close();
-                    }
-                    if (FichierChiffrer != null)
-                    {
-                        FichierChiffrer.Close();
-                    }
+                    cs.WriteByte((byte)data);
                 }
             }
+            finally
+            {
+                /* Cs ferme le fichier non chiffrer */
+                if (cs != null)
+                {
+                    cs.Close();
+                }
+                if (FichierChiffrer != null)
+                {
+                    FichierChiffrer.Close();
+                }
+            }
+        }
 
     }
 }
