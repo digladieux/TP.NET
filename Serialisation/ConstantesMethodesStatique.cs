@@ -12,155 +12,76 @@ namespace Statique
     {
         public static ISerialisation ChoixSerialisation = null ;
         public static string MotDePasse = null;
+        public static string CheminFichierChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceChiffree.dat";
+        public static string CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceNonChiffree.dat";
     }
 
     public class MethodesStatiques
     {
     
-        public static void ChiffrementFichier(Rijndael Chiffrement, string CheminFichierChiffrer, string CheminFichierNonChiffrer)
+        public static void ChiffrementFichier(Rijndael Chiffrement)
         {
-            ChoixCleChiffrement(Chiffrement);
-            TextReader FichierNonChiffrer = new StreamReader(CheminFichierNonChiffrer);
-            FileStream FichierChiffre = new FileStream(CheminFichierChiffrer, FileMode.Create);
-            ICryptoTransform aesEncryptor = Chiffrement.CreateEncryptor();
-            CryptoStream cs = new CryptoStream(FichierChiffre, aesEncryptor, CryptoStreamMode.Write);
+            TextReader FichierNonChiffrer = null;
+            CryptoStream cs = null;
 
-            byte[] buffer = Encoding.ASCII.GetBytes(FichierNonChiffrer.ReadToEnd());
-            cs.Write(buffer, 0, buffer.Length);
-            cs.Close();
+            try
+            {
+                FichierNonChiffrer = new StreamReader(Constantes.CheminFichierNonChiffrer);
+                FileStream FichierChiffre = new FileStream(Constantes.CheminFichierChiffrer, FileMode.Create);
+                ICryptoTransform aesEncryptor = Chiffrement.CreateEncryptor();
+                cs = new CryptoStream(FichierChiffre, aesEncryptor, CryptoStreamMode.Write);
 
-            FichierNonChiffrer.Close();
-            File.Delete(CheminFichierNonChiffrer);
-            FichierChiffre.Close();
-            ChoixMotDePasse();
+                byte[] buffer = Encoding.ASCII.GetBytes(FichierNonChiffrer.ReadToEnd());
+                cs.Write(buffer, 0, buffer.Length);
+
+            }
+            finally
+            {
+                /* Cs ferme aussi le fichier chiffrer */
+                if (cs != null)
+                {
+                    cs.Close();
+                }
+
+                FichierNonChiffrer.Close();
+                File.Delete(Constantes.CheminFichierNonChiffrer);
+
+            }
+
         }
 
-        public static bool DechiffrementFichier(Rijndael Chiffrement, string CheminFichierChiffrer, string CheminFichierNonChiffrer)
+        public static void DechiffrementFichier(Rijndael Chiffrement)
         {
-            bool IsMotDePasseValide = MotDePasseValide();
-            if (IsMotDePasseValide)
+            CryptoStream cs = null;
+            FileStream FichierChiffrer = null;
+            try
             {
-                try
-                {
-                    FileStream FichierChiffrer = new FileStream(CheminFichierChiffrer, FileMode.Open);
+                FichierChiffrer = new FileStream(Constantes.CheminFichierChiffrer, FileMode.Open);
                     //FileStream FichierChiffrer = new FileStream("toto.txt", FileMode.Open);
-                    FileStream FichierNonChiffrer = new FileStream(CheminFichierNonChiffrer, FileMode.Create);
+                    FileStream FichierNonChiffrer = new FileStream(Constantes.CheminFichierNonChiffrer, FileMode.Create);
                     ICryptoTransform aesDecryptor = Chiffrement.CreateDecryptor();
 
-                    CryptoStream cs = new CryptoStream(FichierNonChiffrer, aesDecryptor, CryptoStreamMode.Write);
+                    cs = new CryptoStream(FichierNonChiffrer, aesDecryptor, CryptoStreamMode.Write);
 
                     int data;
 
                     while ((data = FichierChiffrer.ReadByte()) != -1)
                         cs.WriteByte((byte)data);
 
-                    cs.Close();
-                    FichierNonChiffrer.Close();
-                    FichierChiffrer.Close();
                 }
-                catch(FileNotFoundException)
+                finally
                 {
-                    Console.WriteLine("\nLe fichier n'existe pas");
+                    /* Cs ferme le fichier non chiffrer */
+                    if (cs != null)
+                    {
+                        cs.Close();
+                    }
+                    if (FichierChiffrer != null)
+                    {
+                        FichierChiffrer.Close();
+                    }
                 }
             }
-            else
-            {
-                Constantes.ChoixSerialisation = null;
-                Console.WriteLine("Mot de passe Invalide 3 tentatives .. Suppression de la Base de donnée\n");
-                File.Delete(CheminFichierChiffrer);
 
-            }
-            return IsMotDePasseValide;
-        }
-
-        private static void ChoixMotDePasse()
-        {
-            Console.WriteLine("Entrez le mot de passe qui servira au déchiffrement");
-            Constantes.MotDePasse = Console.ReadLine();
-        }
-
-        public static bool MotDePasseValide()
-        {
-            int compteur = 0;
-            bool IsMotDePasseValide = true;
-            string Password;
-            do
-            {
-                Console.WriteLine("Entrer le mot de passe du fichier chiffrer");
-                compteur++;
-                Password = Console.ReadLine();
-            } while ((!Password.Equals(Constantes.MotDePasse)) && (compteur < 3));
-            if (compteur == 3)
-            {
-                Console.WriteLine();
-                IsMotDePasseValide = false;
-            }
-
-            return IsMotDePasseValide;
-        }
-
-        private static void ChoixCleChiffrement(Rijndael Chifffrement)
-        {
-            Console.WriteLine("Entrez la clé de chiffrement");
-            Console.WriteLine("Ne tapez rien pour une clé par défault");
-            Console.WriteLine("Sinon, taper une chaine de plus de 8 caracteres");
-            string CleUtilisateur;
-            do
-            {
-                CleUtilisateur = Console.ReadLine();
-
-            } while((CleUtilisateur != "") && (CleUtilisateur.Length < 8)) ;
-
-            Rfc2898DeriveBytes rfcDb; 
-
-            if (CleUtilisateur != "")
-            {
-                rfcDb = new Rfc2898DeriveBytes(CleUtilisateur, Encoding.UTF8.GetBytes(CleUtilisateur));
-
-            }
-            else
-            {
-                rfcDb = new Rfc2898DeriveBytes(WindowsIdentity.GetCurrent().User.ToString(), Encoding.UTF8.GetBytes(WindowsIdentity.GetCurrent().User.ToString()));
-            }
-
-            Chifffrement.Key = rfcDb.GetBytes(16);
-            Chifffrement.IV = rfcDb.GetBytes(16);
-        }
-
-        public static Dossier RechercheDossier(Dossier ListeDossier)
-        {
-            Dossier DossierParent = null;
-            while (DossierParent == null)
-            {
-                Console.WriteLine(ListeDossier.ToString(false));
-                int choix = ChoixUtilisateurValide();
-                DossierParent = ListeDossier.RechercherDossier(choix);
-            }
-            return DossierParent;
-        }
-
-
-        public static int ChoixUtilisateurValide()
-        {
-            string ChaineChoixUtilisateur;
-            int EntierChoixUtilisateur = -1;
-            bool IsChoixValide = false;
-            while (!IsChoixValide)
-            {
-                try
-                {
-                    ChaineChoixUtilisateur = Console.ReadLine();
-                    EntierChoixUtilisateur = int.Parse(ChaineChoixUtilisateur);
-                    IsChoixValide = true;
-                    Console.WriteLine();
-
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Chaine Invalide\n");
-                }
-            }
-            return EntierChoixUtilisateur;
-        }
     }
 }

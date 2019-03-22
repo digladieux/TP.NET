@@ -10,48 +10,38 @@ namespace Statique
 {
     public class SerialisationBinaire : ISerialisation
     {
-        private readonly string CheminFichierChiffrer ;
-        private readonly string CheminFichierNonChiffrer;
-
-        public SerialisationBinaire()
-        {
-            CheminFichierChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName +"ArborescenceChiffree.dat";
-            CheminFichierNonChiffrer = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Environment.UserName + "ArborescenceNonChiffree.dat";
-        }
+        public SerialisationBinaire(){}
 
         public void Deserialise(Rijndael Chiffrement, ref Dossier ListeDossier)
         {
-            if (MethodesStatiques.DechiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer))
-            {
-                Dossier ListeDossierTemporaire = null ;
-                BinaryFormatter formatter = new BinaryFormatter();
+            MethodesStatiques.DechiffrementFichier(Chiffrement);
+                    Dossier ListeDossierTemporaire = null ;
+                    BinaryFormatter formatter = new BinaryFormatter();
 
-                try
-                {
-                    FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Open);
-                    ListeDossierTemporaire = (Dossier) formatter.Deserialize(FichierNonChiffrer);
-                    FichierNonChiffrer.Close();
-                    if (ListeDossierTemporaire != null)
+                    try
                     {
-                        ListeDossier = ListeDossierTemporaire;
+                        FileStream FichierNonChiffrer= new FileStream(Constantes.CheminFichierNonChiffrer, FileMode.Open);
+                        ListeDossierTemporaire = (Dossier) formatter.Deserialize(FichierNonChiffrer);
+                        FichierNonChiffrer.Close();
+                        if (ListeDossierTemporaire != null)
+                        {
+                            ListeDossier = ListeDossierTemporaire;
+                        }
+                        File.Delete(Constantes.CheminFichierNonChiffrer);
                     }
-                    File.Delete(CheminFichierNonChiffrer);
-                }
-                catch (FileNotFoundException)
-                {
-                    Console.WriteLine("Vous gardez votre Liste de Dossier\n");
-                }
-
-            }
+                    catch (FileNotFoundException e)
+                    {
+                        throw e;
+                    }
         }
 
         public void Serialise(Rijndael Chiffrement, Dossier Arborescence)
         {
-            FileStream FichierNonChiffrer= new FileStream(CheminFichierNonChiffrer, FileMode.Create);
+            FileStream FichierNonChiffrer= new FileStream(Constantes.CheminFichierNonChiffrer, FileMode.Create);
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(FichierNonChiffrer, Arborescence);
             FichierNonChiffrer.Close();
-            MethodesStatiques.ChiffrementFichier(Chiffrement, CheminFichierChiffrer, CheminFichierNonChiffrer);
+            MethodesStatiques.ChiffrementFichier(Chiffrement);
         }
     }
 }

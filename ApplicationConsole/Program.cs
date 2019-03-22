@@ -1,6 +1,7 @@
 ﻿using EntitiesLayer;
 using Statique;
 using System;
+using System.IO;
 using System.Security.Cryptography;
 
 namespace ApplicationConsole
@@ -16,12 +17,22 @@ namespace ApplicationConsole
             do
             {
                 AffichageMenu();
-                EntierChoixUtilisateur = MethodesStatiques.ChoixUtilisateurValide();
-                Running = ChoixMethode(ref ListeDossier, Chiffrement, EntierChoixUtilisateur);
+                try
+                {
+                    EntierChoixUtilisateur = SaisieUtilisateur.ChoixUtilisateurValide();
+                    Running = ChoixMethode(ref ListeDossier, Chiffrement, EntierChoixUtilisateur);
+                }
+                catch(FormatException)
+                {
+                    Console.Write("Instruction inconnue\n");
+                }
 
             }while (Running) ;
         }
 
+        /// <summary>
+        /// Affichage des choix de l'utilisateur
+        /// </summary>
         private static void AffichageMenu()
         {
             Console.WriteLine("Taper 1 pour sortir de l'application");
@@ -31,7 +42,7 @@ namespace ApplicationConsole
             Console.WriteLine("Taper 5 pour charger les donnees");
             Console.WriteLine("Taper 6 pour enregistrer les donnees\n");
         }
-
+        
         private static bool ChoixMethode(ref Dossier ListeDossier, Rijndael Chiffrement, int ChoixUtilisateur)
         {
             bool Running = true;
@@ -82,10 +93,39 @@ namespace ApplicationConsole
             }
             else
             {
-                Constantes.ChoixSerialisation.Deserialise(Chiffrement, ref ListeDossier);
+                if (!SaisieUtilisateur.MotDePasseValide())
+                {
+                    Constantes.ChoixSerialisation = null;
+                    File.Delete(Constantes.CheminFichierChiffrer);
+                    Console.WriteLine("Mot de passe Invalide 3 tentatives .. Suppression de la Base de donnée\n");
+                }
+                else
+                {
+                    try
+                    {
+                        Constantes.ChoixSerialisation.Deserialise(Chiffrement, ref ListeDossier);
+                    }
+                    catch(FileNotFoundException)
+                    {
+                        Console.WriteLine("Le fichier n'existe pas\n");
+                    }
+                    catch(UnauthorizedAccessException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
             }
         }
 
+        private static void AffichageRelation()
+        {
+            Console.WriteLine("\nQuel est votre relation avec ce contact ?");
+            Console.WriteLine("Taper 1 si le contact est un Ami");
+            Console.WriteLine("Taper 2 si le contact est un Collegue");
+            Console.WriteLine("Taper 3 si le contact est une Relation");
+            Console.WriteLine("Taper 4 si le contact est un Reseau\n");
+
+        }
         private static void CaseCreationContact(Dossier ListeDossier)
         {
             if (ListeDossier == null)
@@ -114,22 +154,24 @@ namespace ApplicationConsole
                     IsCourrielValid = Contact.IsValidCourriel(CourrielContact);
                 }
 
-                Console.WriteLine("\nQuel est votre relation avec ce contact ?");
-                Console.WriteLine("Taper 1 si le contact est un Ami");
-                Console.WriteLine("Taper 2 si le contact est un Collegue");
-                Console.WriteLine("Taper 3 si le contact est une Relation");
-                Console.WriteLine("Taper 4 si le contact est un Reseau\n");
-
+                AffichageRelation();
                 int RelationContact;
                 do
                 {
-                    RelationContact = MethodesStatiques.ChoixUtilisateurValide();
+                    try
+                    {
+                        RelationContact = SaisieUtilisateur.ChoixUtilisateurValide();
+                    }catch(FormatException)
+                    {
+                        RelationContact = -1;
+                        Console.WriteLine("Relation Invalide"); 
+                    }
                 } while ((RelationContact < 0) || (RelationContact > 4));
 
                 Contact NouveauContact = new Contact(NomContact, PrenomContact, CourrielContact, SocieteContact, LienMethodeStatique.IntToLien(RelationContact));
                 Console.WriteLine("\nOù voulez vous inserer ce nouveau contact ?\n");
 
-                Dossier DossierParent = MethodesStatiques.RechercheDossier(ListeDossier);
+                Dossier DossierParent = RechercheDossier(ListeDossier);
 
                 DossierParent.AjouterEntite(NouveauContact);
             }
@@ -152,8 +194,7 @@ namespace ApplicationConsole
             else
             {
                 Console.WriteLine("Où voulez vous inserer ce nouveau dossier ?");
-
-                Dossier DossierParent = MethodesStatiques.RechercheDossier(ListeDossier);
+                Dossier DossierParent = RechercheDossier(ListeDossier);
 
                 NouveauDossier.Profondeur = DossierParent.Profondeur + 1;
                 DossierParent.AjouterEntite(NouveauDossier);
@@ -174,7 +215,15 @@ namespace ApplicationConsole
                 int ChoixUtilisateur;
                 do
                 {
-                    ChoixUtilisateur = MethodesStatiques.ChoixUtilisateurValide();
+                    try
+                    {
+                        ChoixUtilisateur = SaisieUtilisateur.ChoixUtilisateurValide();
+                    }
+                    catch (FormatException)
+                    {
+                        ChoixUtilisateur = -1;
+                        Console.WriteLine("Combinaison Invalide");
+                    }
                 }while((ChoixUtilisateur != 1) && (ChoixUtilisateur != 2) );
 
                 if (ChoixUtilisateur == 1)
@@ -186,13 +235,32 @@ namespace ApplicationConsole
                     Constantes.ChoixSerialisation = new SerialisationXML();
                 }
 
+                SaisieUtilisateur.ChoixCleChiffrement(ref Chiffrement);
                 Constantes.ChoixSerialisation.Serialise(Chiffrement, ListeDossier);
+                SaisieUtilisateur.ChoixMotDePasse();
             }
         }
 
-
+        private static Dossier RechercheDossier(Dossier ListeDossier)
+        {
+            Dossier DossierParent = null;
+            int ChoixUtilisateur; 
+            while (DossierParent == null)
+            {
+                Console.WriteLine(ListeDossier.ToString(false));
+                try
+                {
+                    ChoixUtilisateur = SaisieUtilisateur.ChoixUtilisateurValide();
+                    DossierParent = ListeDossier.RechercherDossier(ChoixUtilisateur);
+                }
+                catch (FormatException)
+                {
+                    ChoixUtilisateur = -1;
+                    Console.WriteLine("Dossier Inexistant");
+                }
+            }
+            return DossierParent; 
+        }
 
     }
-
-   
 }
