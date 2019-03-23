@@ -2,18 +2,40 @@
 
 namespace EntitiesLayer
 {
+    /// <summary>
+    /// Enumeration de tous les liens possibles entre un utilisateur et son contact
+    /// </summary>
     [Flags]
     public enum Lien
     {
+        /// <summary>
+        /// Les 2 personnes sont amis
+        /// </summary>
         Ami,
+        /// <summary>
+        /// Les 2 personnes sont collegues
+        /// </summary>
         Collegue,
+        /// <summary>
+        /// Les 2 personnes sont des connaissances
+        /// </summary>
         Relation,
+        /// <summary>
+        /// Les 2 personnes font parti d'un meme reseau
+        /// </summary>
         Reseau
     }
 
+    /// <summary>
+    /// Classe pour Parser un entier en Lien
+    /// </summary>
     public class LienMethodeStatique
     {
-
+        /// <summary>
+        /// Convertir un entier en Lien. Renvoie une erreur de type InvalidCastException si le lien n'existe pas
+        /// </summary>
+        /// <param name="ChoixLien">L'entier que l'on veut convertir</param>
+        /// <returns>Le nouveau lien</returns>
         public static Lien IntToLien(int ChoixLien)
         {
             Lien Lien;
@@ -33,7 +55,7 @@ namespace EntitiesLayer
                     Lien = Lien.Reseau;
                     break;
                 default:
-                    throw new InvalidCastException("Choix Invalide");
+                    throw new InvalidCastException("Relation Invalide");
             }
 
             return Lien;

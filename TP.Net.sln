@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntitiesLayer", "EntitiesLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialisation", "Serialisation\Serialisation.csproj", "{BD10B771-75DA-40EE-A2CC-4405D0EBEBF9}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "DocumentationTP", "DocumentationTP\DocumentationTP.shfbproj", "{DD72482A-B398-4608-9550-7E68FD60437C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BD10B771-75DA-40EE-A2CC-4405D0EBEBF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD10B771-75DA-40EE-A2CC-4405D0EBEBF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD10B771-75DA-40EE-A2CC-4405D0EBEBF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD72482A-B398-4608-9550-7E68FD60437C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD72482A-B398-4608-9550-7E68FD60437C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD72482A-B398-4608-9550-7E68FD60437C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD72482A-B398-4608-9550-7E68FD60437C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
