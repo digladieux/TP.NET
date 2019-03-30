@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 
-namespace Statique
+namespace Serialisation
 {
     /// <summary>
     /// Classe pour la serialisation de l'arborescence de dossier en binaire
@@ -23,7 +23,10 @@ namespace Statique
         {
             try
             {
-                //MethodesStatiques.DechiffrementFichier(Chiffrement);
+
+                // BUG ICI DECOMMENTER POUR OBSERVER
+                //CryptographieFichier.DechiffrementFichier(Chiffrement);
+
                 Dossier ListeDossierTemporaire = null;
                 BinaryFormatter formatter = new BinaryFormatter();
                 FileStream FichierNonChiffrer = new FileStream(Constantes.CheminFichierNonChiffrer, FileMode.Open);
@@ -52,7 +55,9 @@ namespace Statique
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(FichierNonChiffrer, Arborescence);
             FichierNonChiffrer.Close();
-            //MethodesStatiques.ChiffrementFichier(Chiffrement);
+
+            // BUG ICI
+            //CryptographieFichier.ChiffrementFichier(Chiffrement);
         }
     }
 }

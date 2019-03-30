@@ -1,7 +1,10 @@
 ﻿using EntitiesLayer;
 using System.Security.Cryptography;
 
-namespace Statique
+/// <summary>
+/// Espace de nom de la serialisation 
+/// </summary>
+namespace Serialisation
 {
     /// <summary>
     /// Interface pour l'împlementation du design pattern Factory pour le stockage des instances dans des fichiers

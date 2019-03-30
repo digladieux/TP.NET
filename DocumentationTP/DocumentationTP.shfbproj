@@ -53,9 +53,10 @@
     <VisibleItems>Attributes, ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, InheritedFrameworkInternalMembers, InheritedFrameworkPrivateMembers, Internals, Privates, PrivateFields, Protected, SealedProtected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
     <ApiFilter>
       <Filter entryType="Namespace" fullName="" isExposed="False" xmlns="" />
-<Filter entryType="Namespace" fullName="System" isExposed="True" xmlns="">
-  <Filter entryType="Class" fullName="System.Object" filterName="Object" isExposed="False" />
-</Filter></ApiFilter>
+      <Filter entryType="Namespace" fullName="System" isExposed="True" xmlns="">
+        <Filter entryType="Class" fullName="System.Object" filterName="Object" isExposed="False" />
+      </Filter>
+    </ApiFilter>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

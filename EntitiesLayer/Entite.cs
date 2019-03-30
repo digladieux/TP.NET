@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Xml.Serialization;
 
+/// <summary>
+/// Espace de nom de la couche entite
+/// </summary>
 namespace EntitiesLayer
 {
     /// <summary>

@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Statique
+namespace Serialisation
 {
     /// <summary>
     /// Classe contenant toutes les constantes

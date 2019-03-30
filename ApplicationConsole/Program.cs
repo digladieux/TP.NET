@@ -1,9 +1,12 @@
 ﻿using EntitiesLayer;
-using Statique;
+using Serialisation;
 using System;
 using System.IO;
 using System.Security.Cryptography;
 
+/// <summary>
+/// Espace de nom de l'application console
+/// </summary>
 namespace ApplicationConsole
 {
     /// <summary>
@@ -222,7 +225,7 @@ namespace ApplicationConsole
             // Si nous n'avons pas serialiser avant ou que notre base de donnee a ete supprime, on ne peut pas deserialiser
             if (Constantes.ChoixSerialisation == null)
             {
-                Console.WriteLine("Le fichier de Serialisation n'existe pas\n");
+                Console.WriteLine("Le fichier de Serialisation n'existe pas (vous n'avez peut etre pas serialiser de donnee)\n");
             }
             else
             {
@@ -240,6 +243,7 @@ namespace ApplicationConsole
                     try
                     {
                         Constantes.ChoixSerialisation.Deserialise(Chiffrement, ref ListeDossier);
+                        Constantes.ChoixSerialisation = null;
                     }
                     catch (FileNotFoundException)
                     {

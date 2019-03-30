@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="AffichageMenu m&#233;thode" Url="html/52bcadd5-8e93-744c-c4b8-c91d612b700b.htm" />
+  <HelpKINode Title="AffichageRelation m&#233;thode" Url="html/486db63c-4afc-7d00-65de-89f870c0c7c0.htm" />
+  <HelpKINode Title="AjouterEntite m&#233;thode" Url="html/31548e37-63a7-4f48-ade1-c1d41fd969dc.htm" />
+  <HelpKINode Title="Ami &#233;numeration de membre" Url="html/410a417b-72d0-4bb8-dd98-0697d38249f0.htm" />
+  <HelpKINode Title="ApplicationConsole espace de nom" Url="html/db6577ea-89b2-7d73-8ba1-2334df7892d1.htm" />
+  <HelpKINode Title="ApplicationConsole.Program classe" Url="html/8d4283da-6fb8-cf56-814c-98c45fbb4a51.htm" />
+  <HelpKINode Title="ApplicationConsole.SaisieUtilisateur classe" Url="html/cb364d30-0129-daf5-90c7-c029c05ef909.htm" />
+  <HelpKINode Title="CaseAffichageArborescence m&#233;thode" Url="html/fe2e5e27-6468-28f8-dada-d8ead316b749.htm" />
+  <HelpKINode Title="CaseCreationContact m&#233;thode" Url="html/7b6d9a68-ef4b-7f2b-80ac-8dada416447a.htm" />
+  <HelpKINode Title="CaseCreationDossier m&#233;thode" Url="html/aff855e9-8657-6308-9b9d-986b5e53c759.htm" />
+  <HelpKINode Title="CaseDeserialisation m&#233;thode" Url="html/e1ba82fc-db99-82fd-58fd-d576c524e95d.htm" />
+  <HelpKINode Title="CaseSerialisation m&#233;thode" Url="html/beb0c2a2-d505-a16b-c71b-0c121b54301d.htm" />
+  <HelpKINode Title="CheminFichierChiffrer champ" Url="html/f02cd428-d2b3-dcff-1907-4e6915014d5d.htm" />
+  <HelpKINode Title="CheminFichierNonChiffrer champ" Url="html/d0ac81f8-3545-5818-a411-28ec0db8f6ba.htm" />
+  <HelpKINode Title="ChiffrementFichier m&#233;thode" Url="html/17540686-1fa9-549c-8b32-c334d217f8e2.htm" />
+  <HelpKINode Title="ChoixCleChiffrement m&#233;thode" Url="html/e324a754-1af4-ed70-e7b2-bf54b0154259.htm" />
+  <HelpKINode Title="ChoixMethode m&#233;thode" Url="html/f80d476e-1c5d-be96-5660-6b4db7883ca0.htm" />
+  <HelpKINode Title="ChoixMotDePasse m&#233;thode" Url="html/5c22f62e-3766-d362-b03d-63f68e84fd78.htm" />
+  <HelpKINode Title="ChoixSerialisation champ" Url="html/b711e18f-4565-0e1f-dc53-886ca0e3284f.htm" />
+  <HelpKINode Title="ChoixUtilisateurValide m&#233;thode" Url="html/b98bff9b-5778-c46a-1ed7-7ce4a6f703d7.htm" />
+  <HelpKINode Title="Collegue &#233;numeration de membre" Url="html/410a417b-72d0-4bb8-dd98-0697d38249f0.htm" />
+  <HelpKINode Title="Compteur propri&#233;t&#233;" Url="html/87b100aa-92ca-6af8-650e-9e201fe2f0df.htm" />
+  <HelpKINode Title="Constantes classe">
+    <HelpKINode Title="Constantes Classe" Url="html/fe49ccc3-a88c-138d-2337-bf6815880c1c.htm" />
+    <HelpKINode Title="champs" Url="html/1db7d7b7-9251-d599-1d76-9196a72bc850.htm" />
+    <HelpKINode Title="constructeur" Url="html/09955eb1-8326-e343-322a-c883e5e0590a.htm" />
+    <HelpKINode Title="constructeur" Url="html/087e8060-3628-48d3-68af-32e5c83322f8.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Constantes.CheminFichierChiffrer champ" Url="html/f02cd428-d2b3-dcff-1907-4e6915014d5d.htm" />
+  <HelpKINode Title="Constantes.CheminFichierNonChiffrer champ" Url="html/d0ac81f8-3545-5818-a411-28ec0db8f6ba.htm" />
+  <HelpKINode Title="Constantes.ChoixSerialisation champ" Url="html/b711e18f-4565-0e1f-dc53-886ca0e3284f.htm" />
+  <HelpKINode Title="Constantes.Constantes constructeur">
+    <HelpKINode Title="Constantes Constructeur " Url="html/09955eb1-8326-e343-322a-c883e5e0590a.htm" />
+    <HelpKINode Title="Constantes Constructeur " Url="html/087e8060-3628-48d3-68af-32e5c83322f8.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Constantes.MotDePasse champ" Url="html/4469da92-3a7a-21d0-0c6f-be9ee7f9c6ed.htm" />
+  <HelpKINode Title="Contact classe">
+    <HelpKINode Title="Contact Classe" Url="html/ee426fad-66b5-beef-f494-4ef59ee5e2f0.htm" />
+    <HelpKINode Title="constructeur" Url="html/eeb7d188-1daf-db62-1ac8-381e04253e4a.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/a7c198f2-453d-cc74-d908-71bf402a31a4.htm" />
+    <HelpKINode Title="propri&#233;t&#233;s" Url="html/c1101a09-320a-c0dd-98c1-be881056bbcf.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Contact.Contact constructeur" Url="html/eeb7d188-1daf-db62-1ac8-381e04253e4a.htm" />
+  <HelpKINode Title="Contact.Courriel propri&#233;t&#233;" Url="html/2fef92bf-cbda-4883-88ef-a8784e3c82e6.htm" />
+  <HelpKINode Title="Contact.DateDeCreation propri&#233;t&#233;" Url="html/878ba49f-eadc-d6d5-1444-e11c6975da8b.htm" />
+  <HelpKINode Title="Contact.DateDeModification propri&#233;t&#233;" Url="html/f7bdf5f7-885d-acdb-9beb-e48e23141ec6.htm" />
+  <HelpKINode Title="Contact.IsValidCourriel m&#233;thode" Url="html/25bc7796-a92f-2aff-bf81-ad13db0d1e71.htm" />
+  <HelpKINode Title="Contact.Lien propri&#233;t&#233;" Url="html/29dc0c46-b73d-f1ca-2253-4b1ae8561fa1.htm" />
+  <HelpKINode Title="Contact.Nom propri&#233;t&#233;" Url="html/b0d7a008-92c7-4f97-d33e-dac2ad757228.htm" />
+  <HelpKINode Title="Contact.Prenom propri&#233;t&#233;" Url="html/d4439ba1-3f42-389f-a9b6-1b84db107709.htm" />
+  <HelpKINode Title="Contact.Societe propri&#233;t&#233;" Url="html/b8b44a56-9dae-6156-454a-d3205dd1535f.htm" />
+  <HelpKINode Title="Contact.ToString m&#233;thode" Url="html/2dda07dd-2ec9-e02d-d00f-ca3d80a1e3e1.htm" />
+  <HelpKINode Title="Courriel propri&#233;t&#233;" Url="html/2fef92bf-cbda-4883-88ef-a8784e3c82e6.htm" />
+  <HelpKINode Title="CryptographieFichier classe">
+    <HelpKINode Title="CryptographieFichier Classe" Url="html/64abcb62-f88e-970f-9a68-6b7ac81a036a.htm" />
+    <HelpKINode Title="constructeur" Url="html/b70fca43-79c1-07b8-d486-12ca47c08e15.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/95acacf2-9931-4730-b4e9-47bbc668ba27.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CryptographieFichier.ChiffrementFichier m&#233;thode" Url="html/17540686-1fa9-549c-8b32-c334d217f8e2.htm" />
+  <HelpKINode Title="CryptographieFichier.CryptographieFichier constructeur" Url="html/b70fca43-79c1-07b8-d486-12ca47c08e15.htm" />
+  <HelpKINode Title="CryptographieFichier.DechiffrementFichier m&#233;thode" Url="html/2c97d788-9c34-d5cb-d8fa-799ad5be7949.htm" />
+  <HelpKINode Title="DateDeCreation propri&#233;t&#233;">
+    <HelpKINode Title="Contact.DateDeCreation Propri&#233;t&#233; " Url="html/878ba49f-eadc-d6d5-1444-e11c6975da8b.htm" />
+    <HelpKINode Title="Dossier.DateDeCreation Propri&#233;t&#233; " Url="html/ab4fbff6-c0e8-e416-739e-8b1d6ff173cc.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DateDeModification propri&#233;t&#233;">
+    <HelpKINode Title="Contact.DateDeModification Propri&#233;t&#233; " Url="html/f7bdf5f7-885d-acdb-9beb-e48e23141ec6.htm" />
+    <HelpKINode Title="Dossier.DateDeModification Propri&#233;t&#233; " Url="html/bfcab975-1dfd-807c-adaf-764af1708616.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DechiffrementFichier m&#233;thode" Url="html/2c97d788-9c34-d5cb-d8fa-799ad5be7949.htm" />
+  <HelpKINode Title="Deserialise m&#233;thode">
+    <HelpKINode Title="ISerialisation.Deserialise M&#233;thode " Url="html/75e1f602-865f-438c-b79f-586888107961.htm" />
+    <HelpKINode Title="SerialisationBinaire.Deserialise M&#233;thode " Url="html/7c1a577a-186e-005c-e4bc-a4d3abb74a27.htm" />
+    <HelpKINode Title="SerialisationXML.Deserialise M&#233;thode " Url="html/e992b798-1c84-18b7-9dbb-f0bbfdc0a514.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Dossier classe">
+    <HelpKINode Title="Dossier Classe" Url="html/15f150b0-ea24-a18e-5fcc-2198eddfbfe7.htm" />
+    <HelpKINode Title="constructeur" Url="html/7dafaf5e-cf39-374a-ef6d-d7339fbf7f6e.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/37fee6f2-2a65-3ee5-9b30-3e339f8cbbc5.htm" />
+    <HelpKINode Title="propri&#233;t&#233;s" Url="html/b3db7a49-4e48-7224-4dba-ad80ede3a24f.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Dossier.AjouterEntite m&#233;thode" Url="html/31548e37-63a7-4f48-ade1-c1d41fd969dc.htm" />
+  <HelpKINode Title="Dossier.DateDeCreation propri&#233;t&#233;" Url="html/ab4fbff6-c0e8-e416-739e-8b1d6ff173cc.htm" />
+  <HelpKINode Title="Dossier.DateDeModification propri&#233;t&#233;" Url="html/bfcab975-1dfd-807c-adaf-764af1708616.htm" />
+  <HelpKINode Title="Dossier.Dossier constructeur" Url="html/7dafaf5e-cf39-374a-ef6d-d7339fbf7f6e.htm" />
+  <HelpKINode Title="Dossier.ListeEntite propri&#233;t&#233;" Url="html/9af6cfb1-ad7b-423f-d60e-6415bdb4f4cc.htm" />
+  <HelpKINode Title="Dossier.Nom propri&#233;t&#233;" Url="html/d4f72efe-e89e-3a9b-7e42-9f2ac2cec23d.htm" />
+  <HelpKINode Title="Dossier.Profondeur propri&#233;t&#233;" Url="html/6f4adf58-d3e5-fce0-953a-01eaf2eabdd4.htm" />
+  <HelpKINode Title="Dossier.RechercherDossier m&#233;thode" Url="html/8f278cbf-45d4-3173-60f0-91ff2157bce2.htm" />
+  <HelpKINode Title="Dossier.ToString m&#233;thode" Url="html/74c87c98-bd4d-f9ca-23c3-9abccba0a42d.htm" />
+  <HelpKINode Title="Entite classe">
+    <HelpKINode Title="Entite Classe" Url="html/196d3851-1f6b-542b-04a1-8ae056339725.htm" />
+    <HelpKINode Title="constructeur" Url="html/9be24f14-777f-9467-073f-21ebff36b584.htm" />
+    <HelpKINode Title="constructeur" Url="html/39bb3b71-6cba-1f50-2bee-bffd055ba3e1.htm" />
+    <HelpKINode Title="propri&#233;t&#233;s" Url="html/fc8792ce-947e-6980-e96f-dfbdca311221.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Entite.Compteur propri&#233;t&#233;" Url="html/87b100aa-92ca-6af8-650e-9e201fe2f0df.htm" />
+  <HelpKINode Title="Entite.Entite constructeur">
+    <HelpKINode Title="Entite Constructeur " Url="html/9be24f14-777f-9467-073f-21ebff36b584.htm" />
+    <HelpKINode Title="Entite Constructeur " Url="html/39bb3b71-6cba-1f50-2bee-bffd055ba3e1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Entite.Id propri&#233;t&#233;" Url="html/7bf807b8-e385-c551-ca16-a1406bd4e032.htm" />
+  <HelpKINode Title="EntitiesLayer espace de nom" Url="html/e26cf4cf-ff62-d135-0791-e96c24ddea01.htm" />
+  <HelpKINode Title="EntitiesLayer.Contact classe" Url="html/ee426fad-66b5-beef-f494-4ef59ee5e2f0.htm" />
+  <HelpKINode Title="EntitiesLayer.Dossier classe" Url="html/15f150b0-ea24-a18e-5fcc-2198eddfbfe7.htm" />
+  <HelpKINode Title="EntitiesLayer.Entite classe" Url="html/196d3851-1f6b-542b-04a1-8ae056339725.htm" />
+  <HelpKINode Title="EntitiesLayer.Lien &#233;numeration" Url="html/410a417b-72d0-4bb8-dd98-0697d38249f0.htm" />
+  <HelpKINode Title="EntitiesLayer.LienMethodeStatique classe" Url="html/27459bca-5324-a3e4-6a00-01f15bd9b71b.htm" />
+  <HelpKINode Title="FormulaireCreationContact m&#233;thode" Url="html/662c98d3-8d95-d97d-139b-737f04a23c72.htm" />
+  <HelpKINode Title="Id propri&#233;t&#233;" Url="html/7bf807b8-e385-c551-ca16-a1406bd4e032.htm" />
+  <HelpKINode Title="IntToLien m&#233;thode" Url="html/c6a7d71e-70b6-366d-b8c0-27e130b2541c.htm" />
+  <HelpKINode Title="ISerialisation interface">
+    <HelpKINode Title="ISerialisation Interface" Url="html/bf8b5702-1f38-8c21-46d4-d8e1bb74f01a.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/f25da447-411f-7d8f-b9ef-eb4151bff017.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ISerialisation.Deserialise m&#233;thode" Url="html/75e1f602-865f-438c-b79f-586888107961.htm" />
+  <HelpKINode Title="ISerialisation.Serialise m&#233;thode" Url="html/959fa966-09f0-4511-a5f4-ed0aa5e80e42.htm" />
+  <HelpKINode Title="IsValidCourriel m&#233;thode" Url="html/25bc7796-a92f-2aff-bf81-ad13db0d1e71.htm" />
+  <HelpKINode Title="Lien propri&#233;t&#233;" Url="html/29dc0c46-b73d-f1ca-2253-4b1ae8561fa1.htm" />
+  <HelpKINode Title="Lien &#233;numeration" Url="html/410a417b-72d0-4bb8-dd98-0697d38249f0.htm" />
+  <HelpKINode Title="LienMethodeStatique classe">
+    <HelpKINode Title="LienMethodeStatique Classe" Url="html/27459bca-5324-a3e4-6a00-01f15bd9b71b.htm" />
+    <HelpKINode Title="constructeur" Url="html/a297c6dc-57a4-f77d-2c04-438cb3f51822.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/1d9963c5-23ee-12d2-8d4b-c92d0e796fac.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LienMethodeStatique.IntToLien m&#233;thode" Url="html/c6a7d71e-70b6-366d-b8c0-27e130b2541c.htm" />
+  <HelpKINode Title="LienMethodeStatique.LienMethodeStatique constructeur" Url="html/a297c6dc-57a4-f77d-2c04-438cb3f51822.htm" />
+  <HelpKINode Title="ListeEntite propri&#233;t&#233;" Url="html/9af6cfb1-ad7b-423f-d60e-6415bdb4f4cc.htm" />
+  <HelpKINode Title="Main m&#233;thode" Url="html/27dcf33c-14e3-7fc1-299d-f1e167490d56.htm" />
+  <HelpKINode Title="MotDePasse champ" Url="html/4469da92-3a7a-21d0-0c6f-be9ee7f9c6ed.htm" />
+  <HelpKINode Title="MotDePasseValide m&#233;thode" Url="html/af6f9cd2-c251-9f39-b71a-0c6344ff7e45.htm" />
+  <HelpKINode Title="Nom propri&#233;t&#233;">
+    <HelpKINode Title="Contact.Nom Propri&#233;t&#233; " Url="html/b0d7a008-92c7-4f97-d33e-dac2ad757228.htm" />
+    <HelpKINode Title="Dossier.Nom Propri&#233;t&#233; " Url="html/d4f72efe-e89e-3a9b-7e42-9f2ac2cec23d.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Prenom propri&#233;t&#233;" Url="html/d4439ba1-3f42-389f-a9b6-1b84db107709.htm" />
+  <HelpKINode Title="Profondeur propri&#233;t&#233;" Url="html/6f4adf58-d3e5-fce0-953a-01eaf2eabdd4.htm" />
+  <HelpKINode Title="Program classe">
+    <HelpKINode Title="Program Classe" Url="html/8d4283da-6fb8-cf56-814c-98c45fbb4a51.htm" />
+    <HelpKINode Title="constructeur" Url="html/353390e6-2ab1-bd76-73cb-39fa848e9fea.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/e7e3edb6-438b-18a1-6a91-3db68ea162b8.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Program.AffichageMenu m&#233;thode" Url="html/52bcadd5-8e93-744c-c4b8-c91d612b700b.htm" />
+  <HelpKINode Title="Program.AffichageRelation m&#233;thode" Url="html/486db63c-4afc-7d00-65de-89f870c0c7c0.htm" />
+  <HelpKINode Title="Program.CaseAffichageArborescence m&#233;thode" Url="html/fe2e5e27-6468-28f8-dada-d8ead316b749.htm" />
+  <HelpKINode Title="Program.CaseCreationContact m&#233;thode" Url="html/7b6d9a68-ef4b-7f2b-80ac-8dada416447a.htm" />
+  <HelpKINode Title="Program.CaseCreationDossier m&#233;thode" Url="html/aff855e9-8657-6308-9b9d-986b5e53c759.htm" />
+  <HelpKINode Title="Program.CaseDeserialisation m&#233;thode" Url="html/e1ba82fc-db99-82fd-58fd-d576c524e95d.htm" />
+  <HelpKINode Title="Program.CaseSerialisation m&#233;thode" Url="html/beb0c2a2-d505-a16b-c71b-0c121b54301d.htm" />
+  <HelpKINode Title="Program.ChoixMethode m&#233;thode" Url="html/f80d476e-1c5d-be96-5660-6b4db7883ca0.htm" />
+  <HelpKINode Title="Program.FormulaireCreationContact m&#233;thode" Url="html/662c98d3-8d95-d97d-139b-737f04a23c72.htm" />
+  <HelpKINode Title="Program.Main m&#233;thode" Url="html/27dcf33c-14e3-7fc1-299d-f1e167490d56.htm" />
+  <HelpKINode Title="Program.Program constructeur" Url="html/353390e6-2ab1-bd76-73cb-39fa848e9fea.htm" />
+  <HelpKINode Title="Program.RechercheDossier m&#233;thode" Url="html/1d18fd92-38ff-cb74-c5cd-14c750c4088e.htm" />
+  <HelpKINode Title="RechercheDossier m&#233;thode" Url="html/1d18fd92-38ff-cb74-c5cd-14c750c4088e.htm" />
+  <HelpKINode Title="RechercherDossier m&#233;thode" Url="html/8f278cbf-45d4-3173-60f0-91ff2157bce2.htm" />
+  <HelpKINode Title="Relation &#233;numeration de membre" Url="html/410a417b-72d0-4bb8-dd98-0697d38249f0.htm" />
+  <HelpKINode Title="Reseau &#233;numeration de membre" Url="html/410a417b-72d0-4bb8-dd98-0697d38249f0.htm" />
+  <HelpKINode Title="SaisieUtilisateur classe">
+    <HelpKINode Title="SaisieUtilisateur Classe" Url="html/cb364d30-0129-daf5-90c7-c029c05ef909.htm" />
+    <HelpKINode Title="constructeur" Url="html/f3b03433-51a3-ca25-c05d-981ac232fe1f.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/26446b4a-802c-ab3b-2442-b96a7e5a31d9.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SaisieUtilisateur.ChoixCleChiffrement m&#233;thode" Url="html/e324a754-1af4-ed70-e7b2-bf54b0154259.htm" />
+  <HelpKINode Title="SaisieUtilisateur.ChoixMotDePasse m&#233;thode" Url="html/5c22f62e-3766-d362-b03d-63f68e84fd78.htm" />
+  <HelpKINode Title="SaisieUtilisateur.ChoixUtilisateurValide m&#233;thode" Url="html/b98bff9b-5778-c46a-1ed7-7ce4a6f703d7.htm" />
+  <HelpKINode Title="SaisieUtilisateur.MotDePasseValide m&#233;thode" Url="html/af6f9cd2-c251-9f39-b71a-0c6344ff7e45.htm" />
+  <HelpKINode Title="SaisieUtilisateur.SaisieUtilisateur constructeur" Url="html/f3b03433-51a3-ca25-c05d-981ac232fe1f.htm" />
+  <HelpKINode Title="SerialisationBinaire classe">
+    <HelpKINode Title="SerialisationBinaire Classe" Url="html/7e1b363c-5aba-a905-4b33-689643be386e.htm" />
+    <HelpKINode Title="constructeur" Url="html/e4b7518c-9fc1-2e3c-8355-8ee2a35a2d73.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/e07c71b3-1076-30d5-21f4-13f26dec867e.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SerialisationBinaire.Deserialise m&#233;thode" Url="html/7c1a577a-186e-005c-e4bc-a4d3abb74a27.htm" />
+  <HelpKINode Title="SerialisationBinaire.SerialisationBinaire constructeur" Url="html/e4b7518c-9fc1-2e3c-8355-8ee2a35a2d73.htm" />
+  <HelpKINode Title="SerialisationBinaire.Serialise m&#233;thode" Url="html/f70c0fd1-afa6-684b-8997-f578114a76f2.htm" />
+  <HelpKINode Title="SerialisationXML classe">
+    <HelpKINode Title="SerialisationXML Classe" Url="html/086fd1b3-2739-69fa-137c-65c96341527f.htm" />
+    <HelpKINode Title="constructeur" Url="html/3ae4c920-f0f9-0892-7354-6c3e81260063.htm" />
+    <HelpKINode Title="m&#233;thodes" Url="html/ace21b46-48fb-8027-636d-7e7f684cd5df.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SerialisationXML.Deserialise m&#233;thode" Url="html/e992b798-1c84-18b7-9dbb-f0bbfdc0a514.htm" />
+  <HelpKINode Title="SerialisationXML.SerialisationXML constructeur" Url="html/3ae4c920-f0f9-0892-7354-6c3e81260063.htm" />
+  <HelpKINode Title="SerialisationXML.Serialise m&#233;thode" Url="html/1fd4df40-0fe4-97cc-8607-19113ebe246c.htm" />
+  <HelpKINode Title="Serialise m&#233;thode">
+    <HelpKINode Title="ISerialisation.Serialise M&#233;thode " Url="html/959fa966-09f0-4511-a5f4-ed0aa5e80e42.htm" />
+    <HelpKINode Title="SerialisationBinaire.Serialise M&#233;thode " Url="html/f70c0fd1-afa6-684b-8997-f578114a76f2.htm" />
+    <HelpKINode Title="SerialisationXML.Serialise M&#233;thode " Url="html/1fd4df40-0fe4-97cc-8607-19113ebe246c.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Societe propri&#233;t&#233;" Url="html/b8b44a56-9dae-6156-454a-d3205dd1535f.htm" />
+  <HelpKINode Title="Statique espace de nom" Url="html/73151e8d-491c-c470-c92b-986310887e8b.htm" />
+  <HelpKINode Title="Statique.Constantes classe" Url="html/fe49ccc3-a88c-138d-2337-bf6815880c1c.htm" />
+  <HelpKINode Title="Statique.CryptographieFichier classe" Url="html/64abcb62-f88e-970f-9a68-6b7ac81a036a.htm" />
+  <HelpKINode Title="Statique.ISerialisation interface" Url="html/bf8b5702-1f38-8c21-46d4-d8e1bb74f01a.htm" />
+  <HelpKINode Title="Statique.SerialisationBinaire classe" Url="html/7e1b363c-5aba-a905-4b33-689643be386e.htm" />
+  <HelpKINode Title="Statique.SerialisationXML classe" Url="html/086fd1b3-2739-69fa-137c-65c96341527f.htm" />
+  <HelpKINode Title="ToString m&#233;thode">
+    <HelpKINode Title="Contact.ToString M&#233;thode " Url="html/2dda07dd-2ec9-e02d-d00f-ca3d80a1e3e1.htm" />
+    <HelpKINode Title="Dossier.ToString M&#233;thode " Url="html/74c87c98-bd4d-f9ca-23c3-9abccba0a42d.htm" />
+  </HelpKINode>
+  <HelpKINode Title="version">
+    <HelpKINode Title="1.0.0.0" Url="html/1bed1123-209f-4e8f-9692-412a703ee60a.htm" />
+    <HelpKINode Title="history" Url="html/d5b7f87f-e1da-492d-acba-5b6d5d8b6816.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Welcome" Url="html/b3a45e35-cb90-4074-819e-ac47737b3633.htm" />
+</HelpKI>

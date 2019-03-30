@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Xml.Serialization;
 
-namespace Statique
+namespace Serialisation
 {
     /// <summary>
     /// Classe pour la serialisation de l'arborescence de dossier en XML
